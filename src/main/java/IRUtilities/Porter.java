@@ -1,3 +1,5 @@
+package IRUtilities;
+
 class NewString {
     public String str;
 

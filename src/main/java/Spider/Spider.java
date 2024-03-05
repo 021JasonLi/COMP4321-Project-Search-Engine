@@ -1,3 +1,5 @@
+package Spider;
+
 import org.htmlparser.beans.LinkBean;
 
 import java.net.URL;

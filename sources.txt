@@ -1,0 +1,3 @@
+.\src\main\java\Main.java
+.\src\main\java\IRUtilities\Porter.java
+.\src\main\java\Spider\Spider.java

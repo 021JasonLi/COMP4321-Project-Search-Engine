@@ -1,4 +1,6 @@
-package Indexer;
+package Indexer.URLIndexer;
+
+import Indexer.URLIndexer.URLIndexer;
 
 import java.io.IOException;
 

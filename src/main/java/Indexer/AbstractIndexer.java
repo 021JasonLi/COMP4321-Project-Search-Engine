@@ -2,15 +2,16 @@ package Indexer;
 
 import jdbm.RecordManager;
 import jdbm.RecordManagerFactory;
+import jdbm.helper.FastIterator;
 import jdbm.htree.HTree;
 
 import java.io.IOException;
 
-abstract class AbstractIndexer {
+public abstract class AbstractIndexer {
     protected RecordManager manager;
     protected HTree hashtable;
 
-    AbstractIndexer(String managerName, String objectName) {
+    protected AbstractIndexer(String managerName, String objectName) {
         try {
             manager = RecordManagerFactory.createRecordManager("./db/" + managerName);
             long recId = manager.getNamedObject(objectName);
@@ -22,6 +23,15 @@ abstract class AbstractIndexer {
             }
         } catch (IOException e) {
             e.printStackTrace(System.err);
+        }
+    }
+
+    public void printDbInfo() throws IOException {
+        FastIterator iter = hashtable.keys();
+        String key = (String)iter.next();
+        while (key != null) {
+            System.out.println(key + " = " + hashtable.get(key));
+            key = (String)iter.next();
         }
     }
 

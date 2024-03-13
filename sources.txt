@@ -1,7 +1,7 @@
 .\src\main\java\Main.java
 .\src\main\java\Indexer\AbstractIndexer.java
-.\src\main\java\Indexer\PageIdToUrlIndexer.java
-.\src\main\java\Indexer\URLIndexer.java
-.\src\main\java\Indexer\UrlToPageIdIndexer.java
+.\src\main\java\Indexer\URLIndexer\PageIdToUrlIndexer.java
+.\src\main\java\Indexer\URLIndexer\URLIndexer.java
+.\src\main\java\Indexer\URLIndexer\UrlToPageIdIndexer.java
 .\src\main\java\IRUtilities\Porter.java
 .\src\main\java\Spider\Spider.java

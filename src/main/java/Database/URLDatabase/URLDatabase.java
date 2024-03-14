@@ -1,13 +1,13 @@
-package Indexer.URLIndexer;
+package Database.URLDatabase;
 
-import Indexer.AbstractIndexer;
+import Database.AbstractDatabase;
 
 import java.io.IOException;
 
-public abstract class URLIndexer extends AbstractIndexer {
+public abstract class URLDatabase extends AbstractDatabase {
     protected int currentUrlID = 0;
 
-    protected URLIndexer(String managerName, String objectName) {
+    protected URLDatabase(String managerName, String objectName) {
         super(managerName, objectName);
     }
 

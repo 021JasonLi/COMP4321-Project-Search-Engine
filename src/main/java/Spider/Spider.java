@@ -1,10 +1,9 @@
 package Spider;
 
-import Indexer.URLIndexer.PageIdToUrlIndexer;
-import Indexer.URLIndexer.URLIndexer;
-import Indexer.URLIndexer.UrlToPageIdIndexer;
+import Database.URLDatabase.PageIdToUrlDatabase;
+import Database.URLDatabase.URLDatabase;
+import Database.URLDatabase.UrlToPageIdDatabase;
 import org.htmlparser.beans.LinkBean;
-import org.htmlparser.util.ParserException;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,17 +16,17 @@ public class Spider {
     public final String url;
     public final int maxIndexPages;
 
-    private final URLIndexer urlToPageIdIndexer;
-    private final URLIndexer pageIdToUrlIndexer;
+    private final URLDatabase urlToPageIdDatabase;
+    private final URLDatabase pageIdToUrlDatabase;
 
     public Spider(String url, int maxIndexPages) {
         this.url = url;
         this.maxIndexPages = maxIndexPages;
-        urlToPageIdIndexer = new UrlToPageIdIndexer("urlToPageIdIndexer", "url");
-        pageIdToUrlIndexer = new PageIdToUrlIndexer("pageIdToUrlIndexer", "pageId");
+        urlToPageIdDatabase = new UrlToPageIdDatabase("urlToPageIdIndexer", "url");
+        pageIdToUrlDatabase = new PageIdToUrlDatabase("pageIdToUrlIndexer", "pageId");
     }
 
-    private Vector<String> extractLinks(String url) throws ParserException {
+    private Vector<String> extractLinks(String url) {
         LinkBean linkBean = new LinkBean();
         linkBean.setURL(url);
         URL[] urls = linkBean.getLinks();
@@ -38,7 +37,7 @@ public class Spider {
         return links;
     }
 
-    public void bfs() throws IOException, ParserException{
+    public void bfs() throws IOException{
         Queue<String> queue = new LinkedList<>();
         queue.add(url);
         HashSet<String> visited = new HashSet<>();
@@ -49,8 +48,8 @@ public class Spider {
             if (!visited.contains(url)) {
                 visited.add(url);
                 count++;
-                urlToPageIdIndexer.addEntry(url);
-                pageIdToUrlIndexer.addEntry(url);
+                urlToPageIdDatabase.addEntry(url);
+                pageIdToUrlDatabase.addEntry(url);
                 // Extract links
                 Vector<String> links = extractLinks(url);
                 queue.addAll(links);
@@ -58,8 +57,8 @@ public class Spider {
             }
         }
 
-        urlToPageIdIndexer.finish();
-        pageIdToUrlIndexer.finish();
+        urlToPageIdDatabase.finish();
+        pageIdToUrlDatabase.finish();
     }
 
 }

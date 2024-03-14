@@ -1,11 +1,11 @@
-package Indexer.URLIndexer;
+package Database.URLDatabase;
 
-import Indexer.URLIndexer.URLIndexer;
+import jdbm.helper.FastIterator;
 
 import java.io.IOException;
 
-public class PageIdToUrlIndexer extends URLIndexer {
-    public PageIdToUrlIndexer(String managerName, String objectName) {
+public class PageIdToUrlDatabase extends URLDatabase {
+    public PageIdToUrlDatabase(String managerName, String objectName) {
         super(managerName, objectName);
     }
 
@@ -17,7 +17,6 @@ public class PageIdToUrlIndexer extends URLIndexer {
             }
         }
         hashtable.put(currentUrlID, url);
-        System.out.println("Added: " + currentUrlID + " with url: " + url);
         addIdCounter();
     }
 
@@ -33,5 +32,15 @@ public class PageIdToUrlIndexer extends URLIndexer {
 //            hashtable.remove(pageId);
 //        }
 //    }
+
+    @Override
+    public void printDbInfo() throws IOException {
+        FastIterator iter = hashtable.keys();
+        Integer key = (Integer)iter.next();
+        while (key != null) {
+            System.out.println(key + " = " + hashtable.get(key));
+            key = (Integer)iter.next();
+        }
+    }
 
 }

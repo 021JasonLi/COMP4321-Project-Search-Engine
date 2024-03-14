@@ -1,4 +1,4 @@
-package Indexer;
+package Database;
 
 import jdbm.RecordManager;
 import jdbm.RecordManagerFactory;
@@ -7,11 +7,11 @@ import jdbm.htree.HTree;
 
 import java.io.IOException;
 
-public abstract class AbstractIndexer {
+public abstract class AbstractDatabase {
     protected RecordManager manager;
     protected HTree hashtable;
 
-    protected AbstractIndexer(String managerName, String objectName) {
+    protected AbstractDatabase(String managerName, String objectName) {
         try {
             manager = RecordManagerFactory.createRecordManager("./db/" + managerName);
             long recId = manager.getNamedObject(objectName);

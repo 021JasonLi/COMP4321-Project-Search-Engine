@@ -1,11 +1,9 @@
-package Indexer.URLIndexer;
-
-import Indexer.URLIndexer.URLIndexer;
+package Database.URLDatabase;
 
 import java.io.IOException;
 
-public class UrlToPageIdIndexer extends URLIndexer {
-    public UrlToPageIdIndexer(String managerName, String objectName) {
+public class UrlToPageIdDatabase extends URLDatabase {
+    public UrlToPageIdDatabase(String managerName, String objectName) {
         super(managerName, objectName);
     }
 
@@ -15,7 +13,6 @@ public class UrlToPageIdIndexer extends URLIndexer {
             return;
         }
         hashtable.put(url, currentUrlID);
-        System.out.println("Added: " + url + " with id: " + currentUrlID);
         addIdCounter();
     }
 

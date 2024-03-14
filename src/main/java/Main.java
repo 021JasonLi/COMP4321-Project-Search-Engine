@@ -8,8 +8,7 @@ public class Main {
         Spider spider = new Spider(URL, MAX_INDEX_PAGES);
         try {
             spider.bfs();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace(System.err);
         }
     }

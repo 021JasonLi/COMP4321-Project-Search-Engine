@@ -4,17 +4,12 @@ import Database.AbstractDatabase;
 
 import java.io.IOException;
 
-public abstract class URLDatabase extends AbstractDatabase {
-    protected int currentUrlID = 0;
-
+public abstract class URLDatabase<T, V> extends AbstractDatabase<T, V> {
     protected URLDatabase(String managerName, String objectName) {
         super(managerName, objectName);
     }
 
-    protected void addIdCounter() {
-        currentUrlID++;
-    }
-
-    abstract public void addEntry(String url) throws IOException;
+    @Override
+    abstract public void addEntry(T key, V value) throws IOException;
 
 }

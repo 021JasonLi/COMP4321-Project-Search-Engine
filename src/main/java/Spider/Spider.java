@@ -16,8 +16,8 @@ public class Spider {
     public final String url;
     public final int maxIndexPages;
 
-    private final URLDatabase urlToPageIdDatabase;
-    private final URLDatabase pageIdToUrlDatabase;
+    private final URLDatabase<String, Integer> urlToPageIdDatabase;
+    private final URLDatabase<Integer, String> pageIdToUrlDatabase;
 
     public Spider(String url, int maxIndexPages) {
         this.url = url;
@@ -47,9 +47,9 @@ public class Spider {
             String url = queue.poll();
             if (!visited.contains(url)) {
                 visited.add(url);
+                urlToPageIdDatabase.addEntry(url, count);
+                pageIdToUrlDatabase.addEntry(count, url);
                 count++;
-                urlToPageIdDatabase.addEntry(url);
-                pageIdToUrlDatabase.addEntry(url);
                 // Extract links
                 Vector<String> links = extractLinks(url);
                 queue.addAll(links);

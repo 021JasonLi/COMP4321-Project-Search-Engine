@@ -1,7 +1,6 @@
 package Spider;
 
-import Database.NodeDatabase.ChildToParentNodeDatabase;
-import Database.NodeDatabase.ParentToChildNodeDatabase;
+import Database.NodeDatabase.NodeLinkDatabase;
 import Database.URLDatabase.PageIdToUrlDatabase;
 import Database.URLDatabase.UrlToPageIdDatabase;
 import org.htmlparser.beans.LinkBean;
@@ -10,24 +9,43 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * A web crawler to extract web content and store the results in databases.
+ */
 public class Spider {
     public final String url;
     public final int maxIndexPages;
 
     private final UrlToPageIdDatabase urlToPageIdDatabase;
     private final PageIdToUrlDatabase pageIdToUrlDatabase;
-    private final ParentToChildNodeDatabase parentToChildDatabase;
-    private final ChildToParentNodeDatabase childToParentDatabase;
+    private final NodeLinkDatabase parentToChildDatabase;
+    private final NodeLinkDatabase childToParentDatabase;
 
+    /**
+     * Create a Spider instance.
+     * @param url The URL to start the crawling.
+     * @param maxIndexPages The maximum number of pages to crawl.
+     * @throws IOException If an I/O error occurs when creating the databases.
+     */
     public Spider(String url, int maxIndexPages) throws IOException {
         this.url = url;
         this.maxIndexPages = maxIndexPages;
-        urlToPageIdDatabase = new UrlToPageIdDatabase("urlToPageIdDatabase", "url");
-        pageIdToUrlDatabase = new PageIdToUrlDatabase("pageIdToUrlDatabase", "pageId");
-        parentToChildDatabase = new ParentToChildNodeDatabase("parentToChildDatabase", "parent");
-        childToParentDatabase = new ChildToParentNodeDatabase("childToParentDatabase", "child");
+        urlToPageIdDatabase = new UrlToPageIdDatabase(
+                "urlToPageIdDatabase", "url");
+        pageIdToUrlDatabase = new PageIdToUrlDatabase(
+                "pageIdToUrlDatabase", "pageId");
+        parentToChildDatabase = new NodeLinkDatabase(
+                "parentToChildDatabase", "parent");
+        childToParentDatabase = new NodeLinkDatabase(
+                "childToParentDatabase", "child");
     }
 
+    /**
+     * Perform a breadth-first search on the web pages starting from the given URL
+     * with at most specified number of pages,
+     * and store the results in the databases.
+     * @throws IOException If an I/O error occurs when crawling the web pages.
+     */
     public void bfs() throws IOException{
         Queue<String> queue = new LinkedList<>();
         HashSet<String> visited = new HashSet<>();
@@ -39,7 +57,7 @@ public class Spider {
             String url = queue.poll();
             if (!visited.contains(url)) {
                 visited.add(url);
-                // Convert URL to page ID
+                // Convert URL to page ID and store in database
                 urlToPageIdDatabase.addEntry(url);
                 pageIdToUrlDatabase.addEntry(url);
                 count++;
@@ -49,12 +67,19 @@ public class Spider {
                 childLink.put(url, links);
             }
         }
-        constructParentChildDatabase(childLink);
+        constructParentChildDatabase(childLink); // Construct parent-child database
 
         urlToPageIdDatabase.finish();
         pageIdToUrlDatabase.finish();
+        parentToChildDatabase.finish();
+        childToParentDatabase.finish();
     }
 
+    /**
+     * Extract links from the given URL.
+     * @param url The URL to extract links from.
+     * @return A vector of links extracted from the given URL.
+     */
     private Vector<String> extractLinks(String url) {
         LinkBean linkBean = new LinkBean();
         linkBean.setURL(url);
@@ -66,8 +91,23 @@ public class Spider {
         return links;
     }
 
-    private void constructParentChildDatabase(HashMap<String, Vector<String>> childLink) {
-
+    /**
+     * Construct parent-child database (bidirectional) from the parent-child link map.
+     * @param childLink The parent-child link map.
+     * @throws IOException If an I/O error occurs when accessing the databases.
+     */
+    private void constructParentChildDatabase(HashMap<String, Vector<String>> childLink) throws IOException {
+        for (String parent : childLink.keySet()) {
+            Vector<String> children = childLink.get(parent);
+            int parentId = urlToPageIdDatabase.getEntry(parent);
+            for (String child : children) {
+                int childId = urlToPageIdDatabase.getEntry(child);
+                if (childId != -1) {
+                    parentToChildDatabase.addEntry(parentId, childId);
+                    childToParentDatabase.addEntry(childId, parentId);
+                }
+            }
+        }
     }
 
 }

@@ -5,9 +5,19 @@ import jdbm.helper.FastIterator;
 
 import java.io.IOException;
 
+/**
+ * A database to store the mapping from page id to URL.
+ */
 public class PageIdToUrlDatabase extends AbstractDatabase {
     private int id = 0;
 
+    /**
+     * Create a database with key as page id and value as url.
+     * The page id is unique and update automatically based on the existing entries in the database.
+     * @param managerName The name of the database manager (filename of the db file).
+     * @param objectName The name of the database object.
+     * @throws IOException When there is an error in creating the database.
+     */
     public PageIdToUrlDatabase(String managerName, String objectName) throws IOException {
         super(managerName, objectName);
         updateInitId();
@@ -30,6 +40,12 @@ public class PageIdToUrlDatabase extends AbstractDatabase {
         id++;
     }
 
+    /**
+     * Get the URL of the given page id from the database.
+     * @param pageId The page id to get the URL from the database.
+     * @return The URL of the page id if it exists in the database, otherwise null.
+     * @throws IOException When there is an error in getting the entry from the database.
+     */
     public String getEntry(int pageId) throws IOException {
         if (hashtable.get(pageId) == null) {
             return null;
@@ -37,6 +53,10 @@ public class PageIdToUrlDatabase extends AbstractDatabase {
         return (String) hashtable.get(pageId);
     }
 
+    /**
+     * Print the database information with all the entries.
+     * @throws IOException When there is an error in accessing the database.
+     */
     @Override
     public void printDbInfo() throws IOException {
         FastIterator iter = hashtable.keys();

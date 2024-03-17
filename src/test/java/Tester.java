@@ -1,3 +1,4 @@
+import Database.NodeDatabase.NodeLinkDatabase;
 import Database.URLDatabase.PageIdToUrlDatabase;
 import Database.URLDatabase.UrlToPageIdDatabase;
 
@@ -22,6 +23,27 @@ public class Tester {
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
+
+        System.out.println("Testing Parent to Child Database");
+        try {
+            NodeLinkDatabase parentToChildDatabase = new NodeLinkDatabase(
+                    "parentToChildDatabase", "parent");
+            parentToChildDatabase.printDbInfo();
+            parentToChildDatabase.finish();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+
+        System.out.println("Testing Child to Parent Database");
+        try {
+            NodeLinkDatabase childToParentDatabase = new NodeLinkDatabase(
+                    "childToParentDatabase", "child");
+            childToParentDatabase.printDbInfo();
+            childToParentDatabase.finish();
+        } catch (Exception e) {
+            e.printStackTrace(System.err);
+        }
+
     }
 
 }

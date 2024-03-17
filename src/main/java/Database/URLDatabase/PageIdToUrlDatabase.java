@@ -1,10 +1,13 @@
 package Database.URLDatabase;
 
+import Database.AbstractDatabase;
 import jdbm.helper.FastIterator;
 
 import java.io.IOException;
 
-public class PageIdToUrlDatabase extends URLDatabase {
+public class PageIdToUrlDatabase extends AbstractDatabase {
+    private int id = 0;
+
     public PageIdToUrlDatabase(String managerName, String objectName) throws IOException {
         super(managerName, objectName);
         updateInitId();
@@ -17,7 +20,6 @@ public class PageIdToUrlDatabase extends URLDatabase {
      * @param url The URL to be added to the database.
      * @throws IOException When there is an error in adding the entry to the database.
      */
-    @Override
     public void addEntry(String url) throws IOException {
         for (int i = 0; i < id; i++) {
             if (hashtable.get(i).equals(url)) {

@@ -1,7 +1,8 @@
 .\src\main\java\Main.java
 .\src\main\java\Database\AbstractDatabase.java
+.\src\main\java\Database\NodeDatabase\ChildToParentNodeDatabase.java
+.\src\main\java\Database\NodeDatabase\ParentToChildNodeDatabase.java
 .\src\main\java\Database\URLDatabase\PageIdToUrlDatabase.java
-.\src\main\java\Database\URLDatabase\URLDatabase.java
 .\src\main\java\Database\URLDatabase\UrlToPageIdDatabase.java
 .\src\main\java\IRUtilities\Porter.java
 .\src\main\java\Spider\Spider.java

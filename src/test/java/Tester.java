@@ -5,22 +5,22 @@ import Database.URLDatabase.UrlToPageIdDatabase;
 public class Tester {
     public static void main(String[] args) {
         System.out.println("Testing URL to Page ID Indexer");
-        URLDatabase urlToPageIdIndexer = new UrlToPageIdDatabase("urlToPageIdIndexer", "url");
         try {
+            URLDatabase urlToPageIdIndexer = new UrlToPageIdDatabase("urlToPageIdDatabase", "url");
             urlToPageIdIndexer.printDbInfo();
+            urlToPageIdIndexer.finish();
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
-        urlToPageIdIndexer.finish();
 
         System.out.println("Testing Page ID to URL Indexer");
-        URLDatabase pageIdToUrlDatabase = new PageIdToUrlDatabase("pageIdToUrlIndexer", "pageId");
         try {
+            URLDatabase pageIdToUrlDatabase = new PageIdToUrlDatabase("pageIdToUrlDatabase", "pageId");
             pageIdToUrlDatabase.printDbInfo();
+            pageIdToUrlDatabase.finish();
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
-        pageIdToUrlDatabase.finish();
     }
 
 }

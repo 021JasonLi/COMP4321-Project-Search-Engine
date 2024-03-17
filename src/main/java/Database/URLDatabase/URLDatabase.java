@@ -4,12 +4,13 @@ import Database.AbstractDatabase;
 
 import java.io.IOException;
 
-public abstract class URLDatabase<T, V> extends AbstractDatabase<T, V> {
+public abstract class URLDatabase extends AbstractDatabase {
+    protected int id = 0;
+
     protected URLDatabase(String managerName, String objectName) {
         super(managerName, objectName);
     }
 
-    @Override
-    abstract public void addEntry(T key, V value) throws IOException;
+    abstract public void addEntry(String url) throws IOException;
 
 }

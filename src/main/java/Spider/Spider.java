@@ -16,14 +16,14 @@ public class Spider {
     public final String url;
     public final int maxIndexPages;
 
-    private final URLDatabase<String, Integer> urlToPageIdDatabase;
-    private final URLDatabase<Integer, String> pageIdToUrlDatabase;
+    private final URLDatabase urlToPageIdDatabase;
+    private final URLDatabase pageIdToUrlDatabase;
 
-    public Spider(String url, int maxIndexPages) {
+    public Spider(String url, int maxIndexPages) throws IOException {
         this.url = url;
         this.maxIndexPages = maxIndexPages;
-        urlToPageIdDatabase = new UrlToPageIdDatabase("urlToPageIdIndexer", "url");
-        pageIdToUrlDatabase = new PageIdToUrlDatabase("pageIdToUrlIndexer", "pageId");
+        urlToPageIdDatabase = new UrlToPageIdDatabase("urlToPageIdDatabase", "url");
+        pageIdToUrlDatabase = new PageIdToUrlDatabase("pageIdToUrlDatabase", "pageId");
     }
 
     private Vector<String> extractLinks(String url) {
@@ -47,8 +47,9 @@ public class Spider {
             String url = queue.poll();
             if (!visited.contains(url)) {
                 visited.add(url);
-                urlToPageIdDatabase.addEntry(url, count);
-                pageIdToUrlDatabase.addEntry(count, url);
+                // Convert URL to page ID
+                urlToPageIdDatabase.addEntry(url);
+                pageIdToUrlDatabase.addEntry(url);
                 count++;
                 // Extract links
                 Vector<String> links = extractLinks(url);

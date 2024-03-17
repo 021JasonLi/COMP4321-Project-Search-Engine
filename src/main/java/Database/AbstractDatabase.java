@@ -7,7 +7,7 @@ import jdbm.htree.HTree;
 
 import java.io.IOException;
 
-public abstract class AbstractDatabase<T, V> {
+public abstract class AbstractDatabase {
     protected RecordManager manager;
     protected HTree hashtable;
 
@@ -25,8 +25,6 @@ public abstract class AbstractDatabase<T, V> {
             e.printStackTrace(System.err);
         }
     }
-
-    abstract public void addEntry(T key, V value) throws IOException;
 
     public void printDbInfo() throws IOException {
         FastIterator iter = hashtable.keys();

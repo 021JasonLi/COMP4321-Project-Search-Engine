@@ -120,7 +120,7 @@ public class Spider {
         if (lastModified == 0) {
             properties.put("lastModified", "unknown");
         } else {
-            properties.put("lastModified", new Date(lastModified).toString());
+            properties.put("lastModified", Long.toString(lastModified));
         }
 
         long size = connection.getContentLengthLong();

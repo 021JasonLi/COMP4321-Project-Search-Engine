@@ -3,7 +3,10 @@ package Database;
 import jdbm.helper.FastIterator;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
+
+import static java.lang.Long.parseLong;
 
 /**
  * A database to store the mapping from page id to URL.
@@ -30,7 +33,6 @@ public class NodePropertyDatabase extends AbstractDatabase {
      */
     @SuppressWarnings("unchecked")
     public void addEntry(int id, HashMap<String, String> properties) throws IOException {
-        if (id == -1) return;
         FastIterator iter = hashtable.keys();
         Integer key = (Integer)iter.next();
         while (key != null) {
@@ -49,11 +51,12 @@ public class NodePropertyDatabase extends AbstractDatabase {
      * @return The URL of the page id if it exists in the database, otherwise null.
      * @throws IOException When there is an error in getting the entry from the database.
      */
-    public String getEntry(int pageId) throws IOException {
+    @SuppressWarnings("unchecked")
+    public HashMap<String, String> getEntry(int pageId) throws IOException {
         if (hashtable.get(pageId) == null) {
             return null;
         }
-        return (String) hashtable.get(pageId);
+        return (HashMap<String, String>) hashtable.get(pageId);
     }
 
     /**
@@ -70,7 +73,8 @@ public class NodePropertyDatabase extends AbstractDatabase {
             System.out.println(key + ":");
             System.out.println("URL: " + properties.get("url"));
             System.out.println("Title: " + properties.get("title"));
-            System.out.println("Last Modified: " + properties.get("lastModified"));
+            System.out.println("Last Modified: " +
+                    new Date(parseLong(properties.get("lastModified"))));
             System.out.println("Size: " + properties.get("size"));
             System.out.println();
             key = (Integer)iter.next();

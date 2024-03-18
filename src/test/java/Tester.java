@@ -1,6 +1,6 @@
-import Database.NodeDatabase.NodeLinkDatabase;
-import Database.URLDatabase.PageIdToUrlDatabase;
-import Database.URLDatabase.UrlToPageIdDatabase;
+import Database.NodeLinkDatabase;
+import Database.PageIdToUrlDatabase;
+import Database.UrlToPageIdDatabase;
 
 public class Tester {
     public static void main(String[] args) {

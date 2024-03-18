@@ -1,4 +1,4 @@
-package IRUtilities;
+package Indexer;
 
 class NewString {
     public String str;

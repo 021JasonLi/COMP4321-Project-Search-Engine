@@ -1,4 +1,4 @@
-package Database.URLDatabase;
+package Database;
 
 import Database.AbstractDatabase;
 import jdbm.helper.FastIterator;

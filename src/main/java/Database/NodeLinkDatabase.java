@@ -1,4 +1,4 @@
-package Database.NodeDatabase;
+package Database;
 
 import Database.AbstractDatabase;
 import jdbm.helper.FastIterator;

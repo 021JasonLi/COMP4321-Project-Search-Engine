@@ -1,8 +1,8 @@
 package Spider;
 
-import Database.NodeDatabase.NodeLinkDatabase;
-import Database.URLDatabase.PageIdToUrlDatabase;
-import Database.URLDatabase.UrlToPageIdDatabase;
+import Database.NodeLinkDatabase;
+import Database.PageIdToUrlDatabase;
+import Database.UrlToPageIdDatabase;
 import org.htmlparser.beans.LinkBean;
 
 import java.io.IOException;

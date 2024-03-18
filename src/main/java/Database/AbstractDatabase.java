@@ -36,20 +36,6 @@ public abstract class AbstractDatabase {
     }
 
     /**
-     * Print the database when all the keys and their corresponding values.
-     * @throws IOException If an I/O error occurs when accessing elements in the database.
-     */
-    public void printDbInfo() throws IOException {
-        FastIterator iter = hashtable.keys();
-        String key = (String)iter.next();
-        while (key != null) {
-            System.out.println(key + " = " + hashtable.get(key));
-            key = (String)iter.next();
-        }
-        System.out.println("\n");
-    }
-
-    /**
      * Commit and close the database.
      */
     public void finish() {

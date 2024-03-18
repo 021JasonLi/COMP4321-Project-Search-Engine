@@ -3,6 +3,7 @@ package Database;
 import jdbm.helper.FastIterator;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 
 /**
@@ -38,19 +39,16 @@ public class NodeRelationDatabase extends AbstractDatabase {
         }
     }
 
-    /**
-     * Print the database information with all the entries.
-     * @throws IOException When there is an error in accessing the database.
-     */
-    @Override
-    public void printDbInfo() throws IOException {
+    @SuppressWarnings("unchecked")
+    public HashMap<Integer, HashSet<Integer>> getAllEntries() throws IOException {
         FastIterator iter = hashtable.keys();
         Integer key = (Integer)iter.next();
+        HashMap<Integer, HashSet<Integer>> result = new HashMap<>();
         while (key != null) {
-            System.out.println(key + " = " + hashtable.get(key));
+            result.put(key, (HashSet<Integer>)hashtable.get(key));
             key = (Integer)iter.next();
         }
-        System.out.println("\n");
+        return result;
     }
 
 }

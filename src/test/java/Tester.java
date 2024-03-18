@@ -1,46 +1,49 @@
 import Database.NodeRelationDatabase;
 import Database.NodePropertyDatabase;
-import Database.UrlToPageIdDatabase;
+
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+
+import static java.lang.Long.parseLong;
 
 public class Tester {
-    public static void main(String[] args) {
-        System.out.println("Testing URL to Page ID Database");
-        try {
-            UrlToPageIdDatabase urlToPageIdIndexer = new UrlToPageIdDatabase(
-                    "urlToPageIdDatabase", "url");
-            urlToPageIdIndexer.printDbInfo();
-            urlToPageIdIndexer.finish();
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
-        }
+    public static final String OUTPUT_FILE = "spider_result.txt";
+    public static final int MAX_DISPLAY = 10;
+    public static final String SEPARATOR = "----------------------------------------";
 
-        System.out.println("Testing Node Property Database");
-        try {
+    public static void main(String[] args) {
+        try (FileWriter writer = new FileWriter(OUTPUT_FILE);
+             PrintWriter printWriter = new PrintWriter(writer)) {
             NodePropertyDatabase nodePropertyDatabase = new NodePropertyDatabase(
                     "nodePropertyDatabase", "property");
-            nodePropertyDatabase.printDbInfo();
-            nodePropertyDatabase.finish();
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
-        }
-
-        System.out.println("Testing Parent to Child Database");
-        try {
             NodeRelationDatabase parentToChildDatabase = new NodeRelationDatabase(
                     "parentToChildDatabase", "parent");
-            parentToChildDatabase.printDbInfo();
-            parentToChildDatabase.finish();
-        } catch (Exception e) {
-            e.printStackTrace(System.err);
-        }
 
-        System.out.println("Testing Child to Parent Database");
-        try {
-            NodeRelationDatabase childToParentDatabase = new NodeRelationDatabase(
-                    "childToParentDatabase", "child");
-            childToParentDatabase.printDbInfo();
-            childToParentDatabase.finish();
-        } catch (Exception e) {
+            HashMap<Integer, HashMap<String, String>> properties = nodePropertyDatabase.getAllEntries();
+            HashMap<Integer, HashSet<Integer>> childLinks = parentToChildDatabase.getAllEntries();
+
+            for (int i = 0; i < properties.size(); i++) {
+                printWriter.println("Page title: " + properties.get(i).get("title"));
+                printWriter.println("URL: " + properties.get(i).get("url"));
+                printWriter.print("Last modification date: " +
+                        new Date(parseLong(properties.get(i).get("lastModified"))) + ", ");
+                printWriter.println("Size of page: " + properties.get(i).get("size"));
+                printWriter.println("Keyword frequency: TODO");
+                for (int j = 0; j < MAX_DISPLAY && j < childLinks.get(i).size(); j++) {
+                    printWriter.println("Child link " + (j+1) + ": " +
+                            nodePropertyDatabase.getUrl((int)childLinks.get(i).toArray()[j]));
+                }
+                printWriter.println(SEPARATOR);
+            }
+
+            nodePropertyDatabase.finish();
+            parentToChildDatabase.finish();
+            System.out.println("Output file generated: " + OUTPUT_FILE);
+        }
+        catch (Exception e) {
             e.printStackTrace(System.err);
         }
 

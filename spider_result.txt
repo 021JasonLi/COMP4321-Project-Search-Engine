@@ -1,0 +1,199 @@
+Page title: Test page
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm
+Last modification date: Tue May 16 13:03:16 HKT 2023, Size of page: 603 Bytes
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/ust_cse.htm
+Child link 2: https://www.cse.ust.hk/~kwtleung/COMP4321/news.htm
+Child link 3: https://www.cse.ust.hk/~kwtleung/COMP4321/books.htm
+Child link 4: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: CSE department of HKUST
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/ust_cse.htm
+Last modification date: Tue May 16 13:03:16 HKT 2023, Size of page: 392 Bytes
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm
+Child link 2: https://www.cse.ust.hk/~kwtleung/COMP4321/ust_cse/PG.htm
+Child link 3: https://www.cse.ust.hk/~kwtleung/COMP4321/ust_cse/UG.htm
+----------------------------------------
+Page title: News
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/news.htm
+Last modification date: Tue May 16 13:03:16 HKT 2023, Size of page: 384 Bytes
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm
+Child link 2: https://www.cse.ust.hk/~kwtleung/COMP4321/news/cnn.htm
+Child link 3: https://www.cse.ust.hk/~kwtleung/COMP4321/news/bbc.htm
+----------------------------------------
+Page title: books
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/books.htm
+Last modification date: Tue May 16 13:03:16 HKT 2023, Size of page: 601 Bytes
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm
+Child link 2: https://www.cse.ust.hk/~kwtleung/COMP4321/books/book1.htm
+Child link 3: https://www.cse.ust.hk/~kwtleung/COMP4321/books/book2.htm
+Child link 4: https://www.cse.ust.hk/~kwtleung/COMP4321/books/book3.htm
+----------------------------------------
+Page title: Movie Index Page
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+Last modification date: Tue May 16 13:09:22 HKT 2023, Size of page: 19.08 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm
+Child link 2: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/1.html
+Child link 3: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/2.html
+Child link 4: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/3.html
+Child link 5: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/4.html
+Child link 6: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/5.html
+Child link 7: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/6.html
+Child link 8: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/7.html
+Child link 9: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/8.html
+Child link 10: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/9.html
+----------------------------------------
+Page title: PG
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/ust_cse/PG.htm
+Last modification date: Tue May 16 13:03:46 HKT 2023, Size of page: 3.19 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/ust_cse.htm
+----------------------------------------
+Page title: UG
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/ust_cse/UG.htm
+Last modification date: Tue May 16 13:03:46 HKT 2023, Size of page: 3.97 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/ust_cse.htm
+----------------------------------------
+Page title: BBC news
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/news/bbc.htm
+Last modification date: Tue May 16 13:03:44 HKT 2023, Size of page: 499 Bytes
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/news.htm
+----------------------------------------
+Page title: CNN news
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/news/cnn.htm
+Last modification date: Tue May 16 13:03:44 HKT 2023, Size of page: 448 Bytes
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/news.htm
+----------------------------------------
+Page title: book1
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/books/book1.htm
+Last modification date: Tue May 16 13:03:16 HKT 2023, Size of page: 1.58 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/books.htm
+----------------------------------------
+Page title: book2
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/books/book2.htm
+Last modification date: Tue May 16 13:03:16 HKT 2023, Size of page: 2.04 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/books.htm
+----------------------------------------
+Page title: book3
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/books/book3.htm
+Last modification date: Tue May 16 13:03:16 HKT 2023, Size of page: 1.95 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/books.htm
+----------------------------------------
+Page title: Dinosaur Planet (2003)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/1.html
+Last modification date: Tue May 16 13:03:16 HKT 2023, Size of page: 3.52 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: Isle of Man TT 2004 Review (2004)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/2.html
+Last modification date: Tue May 16 13:03:26 HKT 2023, Size of page: 2.80 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: Character (1997)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/3.html
+Last modification date: Tue May 16 13:03:36 HKT 2023, Size of page: 3.91 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: Paula Abdul's Get Up and Dance (1994)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/4.html
+Last modification date: Tue May 16 13:03:38 HKT 2023, Size of page: 2.75 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: The Rise and Fall of ECW (2004)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/5.html
+Last modification date: Tue May 16 13:03:38 HKT 2023, Size of page: 3.84 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: Sick (1997)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/6.html
+Last modification date: Tue May 16 13:03:40 HKT 2023, Size of page: 5.12 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: 8 Man (1992)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/7.html
+Last modification date: Tue May 16 13:03:40 HKT 2023, Size of page: 3.42 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: What the #$*! Do We Know!? (2004)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/8.html
+Last modification date: Tue May 16 13:03:42 HKT 2023, Size of page: 4.05 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: Class of Nuke 'Em High 2 (1991)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/9.html
+Last modification date: Tue May 16 13:03:44 HKT 2023, Size of page: 6.91 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: Fighter (2001)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/10.html
+Last modification date: Tue May 16 13:03:16 HKT 2023, Size of page: 12.89 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: Full Frame: Documentary Shorts (1999)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/11.html
+Last modification date: Tue May 16 13:03:18 HKT 2023, Size of page: 2.64 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: My Favorite Brunette (1947)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/12.html
+Last modification date: Tue May 16 13:03:18 HKT 2023, Size of page: 6.28 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: Lord of the Rings: The Return of the King: Extended Edition: Bonus Material (2003)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/13.html
+Last modification date: Tue May 16 13:03:20 HKT 2023, Size of page: 2.93 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: Nature: Antarctica (1982)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/14.html
+Last modification date: Tue May 16 13:03:20 HKT 2023, Size of page: 3.62 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: Neil Diamond: Greatest Hits Live (1988)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/15.html
+Last modification date: Tue May 16 13:03:20 HKT 2023, Size of page: 5.29 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: Screamers (1996)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/16.html
+Last modification date: Tue May 16 13:03:22 HKT 2023, Size of page: 3.65 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: 7 Seconds (2005)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/17.html
+Last modification date: Tue May 16 13:03:22 HKT 2023, Size of page: 3.44 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------
+Page title: Immortal Beloved (1994)
+URL: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/18.html
+Last modification date: Tue May 16 13:03:24 HKT 2023, Size of page: 7.41 KB
+Keyword frequency: TODO
+Child link 1: https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
+----------------------------------------

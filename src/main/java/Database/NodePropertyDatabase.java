@@ -3,10 +3,8 @@ package Database;
 import jdbm.helper.FastIterator;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 
-import static java.lang.Long.parseLong;
 
 /**
  * A database to store the mapping from page id to URL.
@@ -45,41 +43,21 @@ public class NodePropertyDatabase extends AbstractDatabase {
         hashtable.put(id, properties);
     }
 
-    /**
-     * Get the URL of the given page id from the database.
-     * @param pageId The page id to get the URL from the database.
-     * @return The URL of the page id if it exists in the database, otherwise null.
-     * @throws IOException When there is an error in getting the entry from the database.
-     */
     @SuppressWarnings("unchecked")
-    public HashMap<String, String> getEntry(int pageId) throws IOException {
-        if (hashtable.get(pageId) == null) {
-            return null;
-        }
-        return (HashMap<String, String>) hashtable.get(pageId);
-    }
-
-    /**
-     * Print the database information with all the entries.
-     * @throws IOException When there is an error in accessing the database.
-     */
-    @Override
-    @SuppressWarnings("unchecked")
-    public void printDbInfo() throws IOException {
+    public HashMap<Integer, HashMap<String, String>> getAllEntries() throws IOException {
+        HashMap<Integer, HashMap<String, String>> entries = new HashMap<>();
         FastIterator iter = hashtable.keys();
         Integer key = (Integer)iter.next();
         while (key != null) {
-            HashMap<String, String> properties = (HashMap<String, String>) hashtable.get(key);
-            System.out.println(key + ":");
-            System.out.println("URL: " + properties.get("url"));
-            System.out.println("Title: " + properties.get("title"));
-            System.out.println("Last Modified: " +
-                    new Date(parseLong(properties.get("lastModified"))));
-            System.out.println("Size: " + properties.get("size"));
-            System.out.println();
+            entries.put(key, (HashMap<String, String>) hashtable.get(key));
             key = (Integer)iter.next();
         }
-        System.out.println("\n");
+        return entries;
+    }
+
+    @SuppressWarnings("unchecked")
+    public String getUrl(int id) throws IOException {
+        return ((HashMap<String, String>) hashtable.get(id)).get("url");
     }
 
 }

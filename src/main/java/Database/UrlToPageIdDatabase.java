@@ -1,6 +1,5 @@
 package Database;
 
-import Database.AbstractDatabase;
 import jdbm.helper.FastIterator;
 
 import java.io.IOException;

@@ -2,7 +2,6 @@ package Database;
 
 import jdbm.RecordManager;
 import jdbm.RecordManagerFactory;
-import jdbm.helper.FastIterator;
 import jdbm.htree.HTree;
 
 import java.io.IOException;

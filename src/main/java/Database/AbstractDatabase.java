@@ -46,6 +46,7 @@ public abstract class AbstractDatabase {
             System.out.println(key + " = " + hashtable.get(key));
             key = (String)iter.next();
         }
+        System.out.println("\n");
     }
 
     /**

@@ -3,40 +3,44 @@ package Database;
 import jdbm.helper.FastIterator;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 /**
  * A database to store the mapping from page id to URL.
  */
-public class PageIdToUrlDatabase extends AbstractDatabase {
-    private int id = 0;
+public class NodePropertyDatabase extends AbstractDatabase {
 
     /**
      * Create a database with key as page id and value as url.
      * The page id is unique and update automatically based on the existing entries in the database.
      * @param managerName The name of the database manager (filename of the db file).
      * @param objectName The name of the database object.
-     * @throws IOException When there is an error in creating the database.
      */
-    public PageIdToUrlDatabase(String managerName, String objectName) throws IOException {
+    public NodePropertyDatabase(String managerName, String objectName) {
         super(managerName, objectName);
-        updateInitId();
     }
 
     /**
-     * Add a new URL to the database with a unique id.
-     * The key is the id and the value is the URL.
-     * If the URL already exists in the database, it will not be added.
-     * @param url The URL to be added to the database.
+     * Add an entry to the database with the given page id and its properties,
+     * including the URL and page title, last modified date and size of page.
+     * If the entry already exists in the database, it will not be added again.
+     * @param id The unique id of the URL.
+     * @param properties The properties of the URL.
      * @throws IOException When there is an error in adding the entry to the database.
      */
-    public void addEntry(String url) throws IOException {
-        for (int i = 0; i < id; i++) {
-            if (hashtable.get(i).equals(url)) {
+    @SuppressWarnings("unchecked")
+    public void addEntry(int id, HashMap<String, String> properties) throws IOException {
+        if (id == -1) return;
+        FastIterator iter = hashtable.keys();
+        Integer key = (Integer)iter.next();
+        while (key != null) {
+            String url = ((HashMap<String, String>) hashtable.get(key)).get("url");
+            if ((key == id) && (url.equals(properties.get("url")))) {
                 return;
             }
+            key = (Integer)iter.next();
         }
-        hashtable.put(id, url);
-        id++;
+        hashtable.put(id, properties);
     }
 
     /**
@@ -57,29 +61,21 @@ public class PageIdToUrlDatabase extends AbstractDatabase {
      * @throws IOException When there is an error in accessing the database.
      */
     @Override
+    @SuppressWarnings("unchecked")
     public void printDbInfo() throws IOException {
         FastIterator iter = hashtable.keys();
         Integer key = (Integer)iter.next();
         while (key != null) {
-            System.out.println(key + " = " + hashtable.get(key));
+            HashMap<String, String> properties = (HashMap<String, String>) hashtable.get(key);
+            System.out.println(key + ":");
+            System.out.println("URL: " + properties.get("url"));
+            System.out.println("Title: " + properties.get("title"));
+            System.out.println("Last Modified: " + properties.get("lastModified"));
+            System.out.println("Size: " + properties.get("size"));
+            System.out.println();
             key = (Integer)iter.next();
         }
-    }
-
-    /**
-     * Update the initial id to the (maximum id + 1) in the database.
-     * This is used to ensure that the id is unique.
-     * @throws IOException When there is an error in getting the keys from the database.
-     */
-    private void updateInitId() throws IOException {
-        FastIterator iter = hashtable.keys();
-        Integer key = (Integer)iter.next();
-        while (key != null) {
-            if (key >= id) {
-                id = key + 1;
-            }
-            key = (Integer)iter.next();
-        }
+        System.out.println("\n");
     }
 
 }

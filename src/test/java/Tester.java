@@ -1,10 +1,10 @@
-import Database.NodeLinkDatabase;
-import Database.PageIdToUrlDatabase;
+import Database.NodeRelationDatabase;
+import Database.NodePropertyDatabase;
 import Database.UrlToPageIdDatabase;
 
 public class Tester {
     public static void main(String[] args) {
-        System.out.println("Testing URL to Page ID Indexer");
+        System.out.println("Testing URL to Page ID Database");
         try {
             UrlToPageIdDatabase urlToPageIdIndexer = new UrlToPageIdDatabase(
                     "urlToPageIdDatabase", "url");
@@ -14,19 +14,19 @@ public class Tester {
             e.printStackTrace(System.err);
         }
 
-        System.out.println("Testing Page ID to URL Indexer");
+        System.out.println("Testing Node Property Database");
         try {
-            PageIdToUrlDatabase pageIdToUrlDatabase = new PageIdToUrlDatabase(
-                    "pageIdToUrlDatabase", "pageId");
-            pageIdToUrlDatabase.printDbInfo();
-            pageIdToUrlDatabase.finish();
+            NodePropertyDatabase nodePropertyDatabase = new NodePropertyDatabase(
+                    "nodePropertyDatabase", "property");
+            nodePropertyDatabase.printDbInfo();
+            nodePropertyDatabase.finish();
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
 
         System.out.println("Testing Parent to Child Database");
         try {
-            NodeLinkDatabase parentToChildDatabase = new NodeLinkDatabase(
+            NodeRelationDatabase parentToChildDatabase = new NodeRelationDatabase(
                     "parentToChildDatabase", "parent");
             parentToChildDatabase.printDbInfo();
             parentToChildDatabase.finish();
@@ -36,7 +36,7 @@ public class Tester {
 
         System.out.println("Testing Child to Parent Database");
         try {
-            NodeLinkDatabase childToParentDatabase = new NodeLinkDatabase(
+            NodeRelationDatabase childToParentDatabase = new NodeRelationDatabase(
                     "childToParentDatabase", "child");
             childToParentDatabase.printDbInfo();
             childToParentDatabase.finish();

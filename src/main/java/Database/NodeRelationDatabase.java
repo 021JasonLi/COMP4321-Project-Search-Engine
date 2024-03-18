@@ -8,13 +8,13 @@ import java.util.HashSet;
 /**
  * A database to store the parent-to-child or child-to-parent relationship between nodes.
  */
-public class NodeLinkDatabase extends AbstractDatabase {
+public class NodeRelationDatabase extends AbstractDatabase {
     /**
      * Create a database with key as parent or child node and value as a set of child or parent nodes.
      * @param managerName The name of the database manager (filename of the db file).
      * @param objectName The name of the database object.
      */
-    public NodeLinkDatabase(String managerName, String objectName) {
+    public NodeRelationDatabase(String managerName, String objectName) {
         super(managerName, objectName);
     }
 
@@ -50,6 +50,7 @@ public class NodeLinkDatabase extends AbstractDatabase {
             System.out.println(key + " = " + hashtable.get(key));
             key = (Integer)iter.next();
         }
+        System.out.println("\n");
     }
 
 }

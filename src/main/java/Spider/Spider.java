@@ -1,12 +1,16 @@
 package Spider;
 
-import Database.NodeLinkDatabase;
-import Database.PageIdToUrlDatabase;
+import Database.NodeRelationDatabase;
+import Database.NodePropertyDatabase;
 import Database.UrlToPageIdDatabase;
+import org.htmlparser.Parser;
 import org.htmlparser.beans.LinkBean;
+import org.htmlparser.filters.TagNameFilter;
+import org.htmlparser.util.ParserException;
 
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.*;
 
 /**
@@ -17,9 +21,9 @@ public class Spider {
     public final int maxIndexPages;
 
     private final UrlToPageIdDatabase urlToPageIdDatabase;
-    private final PageIdToUrlDatabase pageIdToUrlDatabase;
-    private final NodeLinkDatabase parentToChildDatabase;
-    private final NodeLinkDatabase childToParentDatabase;
+    private final NodePropertyDatabase nodePropertyDatabase;
+    private final NodeRelationDatabase parentToChildDatabase;
+    private final NodeRelationDatabase childToParentDatabase;
 
     /**
      * Create a Spider instance.
@@ -32,11 +36,11 @@ public class Spider {
         this.maxIndexPages = maxIndexPages;
         urlToPageIdDatabase = new UrlToPageIdDatabase(
                 "urlToPageIdDatabase", "url");
-        pageIdToUrlDatabase = new PageIdToUrlDatabase(
-                "pageIdToUrlDatabase", "pageId");
-        parentToChildDatabase = new NodeLinkDatabase(
+        nodePropertyDatabase = new NodePropertyDatabase(
+                "nodePropertyDatabase", "property");
+        parentToChildDatabase = new NodeRelationDatabase(
                 "parentToChildDatabase", "parent");
-        childToParentDatabase = new NodeLinkDatabase(
+        childToParentDatabase = new NodeRelationDatabase(
                 "childToParentDatabase", "child");
     }
 
@@ -46,7 +50,7 @@ public class Spider {
      * and store the results in the databases.
      * @throws IOException If an I/O error occurs when crawling the web pages.
      */
-    public void bfs() throws IOException{
+    public void bfs() throws IOException, ParserException {
         Queue<String> queue = new LinkedList<>();
         HashSet<String> visited = new HashSet<>();
         HashMap<String, Vector<String>> childLink = new HashMap<>();
@@ -57,10 +61,12 @@ public class Spider {
             String url = queue.poll();
             if (!visited.contains(url)) {
                 visited.add(url);
-                // Convert URL to page ID and store in database
-                urlToPageIdDatabase.addEntry(url);
-                pageIdToUrlDatabase.addEntry(url);
                 count++;
+                // Convert URL to page ID and store in database
+                int id = urlToPageIdDatabase.addEntry(url);
+                // Extract properties and store in database
+                HashMap<String, String> properties = extractProperties(url);
+                nodePropertyDatabase.addEntry(id, properties);
                 // Extract links
                 Vector<String> links = extractLinks(url);
                 queue.addAll(links);
@@ -70,7 +76,7 @@ public class Spider {
         constructParentChildDatabase(childLink); // Construct parent-child database
 
         urlToPageIdDatabase.finish();
-        pageIdToUrlDatabase.finish();
+        nodePropertyDatabase.finish();
         parentToChildDatabase.finish();
         childToParentDatabase.finish();
     }
@@ -92,11 +98,52 @@ public class Spider {
     }
 
     /**
+     * Extract properties, including page title, last modified date and size of page,
+     * from the given URL.
+     * @param url The URL to extract properties from.
+     * @return A map of properties extracted from the given URL.
+     * @throws ParserException If an error occurs when parsing the URL.
+     * @throws IOException If an I/O error occurs when accessing the URL.
+     */
+    private HashMap<String, String> extractProperties(String url)
+            throws ParserException, IOException {
+        HashMap<String, String> properties = new HashMap<>();
+        properties.put("url", url);
+
+        URLConnection connection = new URL(url).openConnection();
+        Parser parser = new Parser(connection);
+        TagNameFilter titleFilter = new TagNameFilter("title");
+        String title = parser.parse(titleFilter).asString();
+        properties.put("title", title);
+
+        long lastModified = connection.getLastModified();
+        if (lastModified == 0) {
+            properties.put("lastModified", "unknown");
+        } else {
+            properties.put("lastModified", new Date(lastModified).toString());
+        }
+
+        long size = connection.getContentLengthLong();
+        if (size == -1) {
+            properties.put("size", "unknown");
+        } else if (size < 1024) {
+            String sizeString = size + " Bytes";
+            properties.put("size", sizeString);
+        } else {
+            String sizeString = String.format("%.2f KB", size / 1024.0);
+            properties.put("size", sizeString);
+        }
+
+        return properties;
+    }
+
+    /**
      * Construct parent-child database (bidirectional) from the parent-child link map.
      * @param childLink The parent-child link map.
      * @throws IOException If an I/O error occurs when accessing the databases.
      */
-    private void constructParentChildDatabase(HashMap<String, Vector<String>> childLink) throws IOException {
+    private void constructParentChildDatabase(HashMap<String, Vector<String>> childLink)
+            throws IOException {
         for (String parent : childLink.keySet()) {
             Vector<String> children = childLink.get(parent);
             int parentId = urlToPageIdDatabase.getEntry(parent);

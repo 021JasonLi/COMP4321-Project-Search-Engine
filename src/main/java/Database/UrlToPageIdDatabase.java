@@ -27,14 +27,17 @@ public class UrlToPageIdDatabase extends AbstractDatabase {
      * The key is the URL and the value is the id.
      * If the URL already exists in the database, it will not be added.
      * @param url The URL to be added to the database.
+     * @return The id of the URL added to the database, or -1 if the URL already exists in the database.
      * @throws IOException When there is an error in adding the entry to the database.
      */
-    public void addEntry(String url) throws IOException {
+    public int addEntry(String url) throws IOException {
         if (hashtable.get(url) != null) {
-            return;
+            return -1;
         }
         hashtable.put(url, id);
+        int currentId = id;
         id++;
+        return currentId;
     }
 
     /**

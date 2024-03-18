@@ -1,7 +1,7 @@
 .\src\main\java\Main.java
 .\src\main\java\Database\AbstractDatabase.java
-.\src\main\java\Database\NodeLinkDatabase.java
-.\src\main\java\Database\PageIdToUrlDatabase.java
+.\src\main\java\Database\NodePropertyDatabase.java
+.\src\main\java\Database\NodeRelationDatabase.java
 .\src\main\java\Database\UrlToPageIdDatabase.java
 .\src\main\java\Indexer\Porter.java
 .\src\main\java\Spider\Spider.java

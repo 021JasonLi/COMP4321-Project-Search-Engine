@@ -1,3 +1,4 @@
+import Indexer.Indexer;
 import Spider.Spider;
 
 import java.util.ArrayList;
@@ -16,9 +17,7 @@ public class Main {
         try {
             Spider spider = new Spider(URL, MAX_INDEX_PAGES);
             ArrayList<HashMap<Integer, Vector<String>>> result = spider.bfs();
-            for (Integer wordIds : result.get(0).keySet()) {
-                System.out.println("Title token ids: " + result.get(0).get(wordIds));
-            }
+            Indexer indexer = new Indexer(result);
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }

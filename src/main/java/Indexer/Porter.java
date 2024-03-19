@@ -1,5 +1,7 @@
 package Indexer;
 
+import java.util.Vector;
+
 class NewString {
     public String str;
 
@@ -328,20 +330,22 @@ public class Porter {
     }
 
 
-    public String stripAffixes(String str) {
-
-        str = str.toLowerCase();
-        str = Clean(str);
-
-        if ((str.length() > 2)) {
-            str = stripPrefixes(str);
-
-            if (!str.isEmpty())
-                str = stripSuffixes(str);
-
+    public Vector<String> stripAffixes(Vector<String> words) {
+        Vector<String> stemmedWords = new Vector<>();
+        for (String str : words) {
+            str = str.toLowerCase();
+            str = Clean(str);
+            if ((str.length() > 2)) {
+                str = stripPrefixes(str);
+                if (!str.isEmpty()) {
+                    str = stripSuffixes(str);
+                }
+            }
+            if (!str.isEmpty()) {
+                stemmedWords.add(str);
+            }
         }
-
-        return str;
+        return stemmedWords;
     }
 
 }

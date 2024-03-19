@@ -22,8 +22,13 @@ public class StopWordRemoval {
     }
 
     public Vector<String> removeStopWord(Vector<String> words) {
-        words.removeIf(stopWords::contains);
-        return words;
+        Vector<String> result = new Vector<>();
+        for (String word : words) {
+            if (!stopWords.contains(word)) {
+                result.add(word);
+            }
+        }
+        return result;
     }
 
 }

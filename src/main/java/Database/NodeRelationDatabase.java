@@ -39,6 +39,11 @@ public class NodeRelationDatabase extends AbstractDatabase {
         }
     }
 
+    /**
+     * Get all the child nodes of all the parent nodes or vice versa from the database.
+     * @return A map from all parent or child nodes to a set of their child or parent nodes.
+     * @throws IOException When there is an error in accessing the database.
+     */
     @SuppressWarnings("unchecked")
     public HashMap<Integer, HashSet<Integer>> getAllEntries() throws IOException {
         FastIterator iter = hashtable.keys();

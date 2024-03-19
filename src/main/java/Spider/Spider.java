@@ -5,6 +5,7 @@ import Database.NodePropertyDatabase;
 import Database.UrlToPageIdDatabase;
 import org.htmlparser.Parser;
 import org.htmlparser.beans.LinkBean;
+import org.htmlparser.beans.StringBean;
 import org.htmlparser.filters.TagNameFilter;
 import org.htmlparser.util.ParserException;
 
@@ -17,8 +18,8 @@ import java.util.*;
  * A web crawler to extract web content and store the results in databases.
  */
 public class Spider {
-    public final String url;
-    public final int maxIndexPages;
+    private final String url;
+    private final int maxIndexPages;
 
     private final UrlToPageIdDatabase urlToPageIdDatabase;
     private final NodePropertyDatabase nodePropertyDatabase;
@@ -48,12 +49,16 @@ public class Spider {
      * Perform a breadth-first search on the web pages starting from the given URL
      * with at most specified number of pages,
      * and store the results in the databases.
+     * @return Title tokens and body tokens of the crawled web pages.
      * @throws IOException If an I/O error occurs when crawling the web pages.
      */
-    public void bfs() throws IOException, ParserException {
+    public ArrayList<HashMap<Integer, Vector<String>>> bfs() throws IOException, ParserException {
         Queue<String> queue = new LinkedList<>();
         HashSet<String> visited = new HashSet<>();
+        HashSet<Integer> visitedId = new HashSet<>();
         HashMap<String, Vector<String>> childLink = new HashMap<>();
+        HashMap<Integer, Vector<String>> titleTokens = new HashMap<>();
+        HashMap<Integer, Vector<String>> bodyTokens = new HashMap<>();
         queue.add(url);
         int count = 0;
 
@@ -64,13 +69,21 @@ public class Spider {
                 count++;
                 // Convert URL to page ID and store in database
                 int id = urlToPageIdDatabase.addEntry(url);
+                visitedId.add(id);
                 // Extract properties and store in database
                 HashMap<String, String> properties = extractProperties(url);
                 nodePropertyDatabase.addEntry(id, properties);
-                // Extract links
+                // Extract links, parent-child database will be constructed later
                 Vector<String> links = extractLinks(url);
                 queue.addAll(links);
                 childLink.put(url, links);
+                // Extract title
+                Vector<String> titleToken = tokenize(properties.get("title"));
+                titleTokens.put(id, titleToken);
+                // Extract body content
+                Vector<String> bodyToken = extractWords(url, titleToken);
+                bodyTokens.put(id, bodyToken);
+
             }
         }
         constructParentChildDatabase(childLink); // Construct parent-child database
@@ -79,6 +92,8 @@ public class Spider {
         nodePropertyDatabase.finish();
         parentToChildDatabase.finish();
         childToParentDatabase.finish();
+
+        return new ArrayList<>(Arrays.asList(titleTokens, bodyTokens));
     }
 
     /**
@@ -95,6 +110,26 @@ public class Spider {
             links.add(link.toString());
         }
         return links;
+    }
+
+    /**
+     * Extract words from the body of the given URL.
+     * @param url The URL to extract words from.
+     * @param title The title tokens of the page to be excluded.
+     * @return A vector of words extracted from the body of the given URL.
+     */
+    private Vector<String> extractWords(String url, Vector<String> title) {
+        StringBean stringBean = new StringBean();
+        stringBean.setLinks(false);
+        stringBean.setCollapse(true);
+        stringBean.setReplaceNonBreakingSpaces(true);
+        stringBean.setURL(url);
+
+        Vector<String> words = tokenize(stringBean.getStrings());
+        for (String token : title) { // Remove title tokens from body tokens
+            words.remove(token);
+        }
+        return words;
     }
 
     /**
@@ -155,6 +190,20 @@ public class Spider {
                 }
             }
         }
+    }
+
+    /**
+     * Tokenize the given content.
+     * @param content The content to be tokenized.
+     * @return A vector of tokens formed from the given content.
+     */
+    private Vector<String> tokenize(String content) {
+        StringTokenizer st = new StringTokenizer(content);
+        Vector<String> tokens = new Vector<>();
+        while (st.hasMoreTokens()) {
+            tokens.add(st.nextToken());
+        }
+        return tokens;
     }
 
 }

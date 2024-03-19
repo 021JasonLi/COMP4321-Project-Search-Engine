@@ -1,5 +1,9 @@
 import Spider.Spider;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Vector;
+
 /**
  * The main class to start the web crawling.
  * The URL and the maximum number of pages to crawl are specified here.
@@ -11,7 +15,8 @@ public class Main {
     public static void main(String[] args) {
         try {
             Spider spider = new Spider(URL, MAX_INDEX_PAGES);
-            spider.bfs();
+            ArrayList<HashMap<Integer, Vector<String>>> result = spider.bfs();
+            System.out.println(result);
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }

@@ -3,6 +3,8 @@
 .\src\main\java\Database\NodePropertyDatabase.java
 .\src\main\java\Database\NodeRelationDatabase.java
 .\src\main\java\Database\UrlToPageIdDatabase.java
+.\src\main\java\Indexer\Indexer.java
 .\src\main\java\Indexer\Porter.java
+.\src\main\java\Indexer\StopWordRemoval.java
 .\src\main\java\Spider\Spider.java
 .\src\test\java\Tester.java

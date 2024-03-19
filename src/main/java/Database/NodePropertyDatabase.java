@@ -5,7 +5,6 @@ import jdbm.helper.FastIterator;
 import java.io.IOException;
 import java.util.HashMap;
 
-
 /**
  * A database to store the mapping from page id to URL.
  */
@@ -43,6 +42,11 @@ public class NodePropertyDatabase extends AbstractDatabase {
         hashtable.put(id, properties);
     }
 
+    /**
+     * Get all properties entries in the database.
+     * @return A map of all page ids to their properties.
+     * @throws IOException When there is an error in getting the entries from the database.
+     */
     @SuppressWarnings("unchecked")
     public HashMap<Integer, HashMap<String, String>> getAllEntries() throws IOException {
         HashMap<Integer, HashMap<String, String>> entries = new HashMap<>();
@@ -55,6 +59,12 @@ public class NodePropertyDatabase extends AbstractDatabase {
         return entries;
     }
 
+    /**
+     * Get the URL of the page with the given page id.
+     * @param id The unique id of the URL.
+     * @return The URL of the page with the given page id.
+     * @throws IOException When there is an error in getting the URL from the database.
+     */
     @SuppressWarnings("unchecked")
     public String getUrl(int id) throws IOException {
         return ((HashMap<String, String>) hashtable.get(id)).get("url");

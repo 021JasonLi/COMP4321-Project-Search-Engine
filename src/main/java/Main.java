@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Vector;
 
 /**
- * The main class to start the web crawling.
+ * The main class to start the web crawling and indexing.
  * The URL and the maximum number of pages to crawl are specified here.
  */
 public class Main {
@@ -16,7 +16,9 @@ public class Main {
         try {
             Spider spider = new Spider(URL, MAX_INDEX_PAGES);
             ArrayList<HashMap<Integer, Vector<String>>> result = spider.bfs();
-            System.out.println(result);
+            for (Integer wordIds : result.get(0).keySet()) {
+                System.out.println("Title token ids: " + result.get(0).get(wordIds));
+            }
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }

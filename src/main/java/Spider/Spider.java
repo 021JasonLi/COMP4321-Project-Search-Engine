@@ -52,10 +52,10 @@ public class Spider {
      * @return Title tokens and body tokens of the crawled web pages.
      * @throws IOException If an I/O error occurs when crawling the web pages.
      */
-    public ArrayList<HashMap<Integer, Vector<String>>> bfs() throws IOException, ParserException {
+    public ArrayList<HashMap<Integer, Vector<String>>> bfs()
+            throws IOException, ParserException {
         Queue<String> queue = new LinkedList<>();
         HashSet<String> visited = new HashSet<>();
-        HashSet<Integer> visitedId = new HashSet<>();
         HashMap<String, Vector<String>> childLink = new HashMap<>();
         HashMap<Integer, Vector<String>> titleTokens = new HashMap<>();
         HashMap<Integer, Vector<String>> bodyTokens = new HashMap<>();
@@ -69,7 +69,6 @@ public class Spider {
                 count++;
                 // Convert URL to page ID and store in database
                 int id = urlToPageIdDatabase.addEntry(url);
-                visitedId.add(id);
                 // Extract properties and store in database
                 HashMap<String, String> properties = extractProperties(url);
                 nodePropertyDatabase.addEntry(id, properties);
@@ -83,16 +82,10 @@ public class Spider {
                 // Extract body content
                 Vector<String> bodyToken = extractWords(url, titleToken);
                 bodyTokens.put(id, bodyToken);
-
             }
         }
         constructParentChildDatabase(childLink); // Construct parent-child database
-
-        urlToPageIdDatabase.finish();
-        nodePropertyDatabase.finish();
-        parentToChildDatabase.finish();
-        childToParentDatabase.finish();
-
+        finalizeAllDatabases();
         return new ArrayList<>(Arrays.asList(titleTokens, bodyTokens));
     }
 
@@ -204,6 +197,13 @@ public class Spider {
             tokens.add(st.nextToken());
         }
         return tokens;
+    }
+
+    private void finalizeAllDatabases() {
+        urlToPageIdDatabase.finish();
+        nodePropertyDatabase.finish();
+        parentToChildDatabase.finish();
+        childToParentDatabase.finish();
     }
 
 }

@@ -18,6 +18,7 @@ public class Main {
             Spider spider = new Spider(URL, MAX_INDEX_PAGES);
             ArrayList<HashMap<Integer, Vector<String>>> result = spider.bfs();
             Indexer indexer = new Indexer(result);
+            indexer.index();
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }

@@ -9,9 +9,13 @@ import java.util.HashSet;
 
 import static java.lang.Long.parseLong;
 
+/**
+ * A test program to read data from the jdbm and outputs a plain-text file.
+ */
 public class Tester {
     public static final String OUTPUT_FILE = "spider_result.txt";
-    public static final int MAX_DISPLAY = 10;
+    public static final int MAX_KEYWORD_DISPLAY = 10;
+    public static final int MAX_CHILD_LINK_DISPLAY = 10;
     public static final String SEPARATOR = "----------------------------------------";
 
     public static void main(String[] args) {
@@ -32,7 +36,7 @@ public class Tester {
                         new Date(parseLong(properties.get(i).get("lastModified"))) + ", ");
                 printWriter.println("Size of page: " + properties.get(i).get("size"));
                 printWriter.println("Keyword frequency: TODO");
-                for (int j = 0; j < MAX_DISPLAY && j < childLinks.get(i).size(); j++) {
+                for (int j = 0; j < MAX_CHILD_LINK_DISPLAY && j < childLinks.get(i).size(); j++) {
                     printWriter.println("Child link " + (j+1) + ": " +
                             nodePropertyDatabase.getUrl((int)childLinks.get(i).toArray()[j]));
                 }

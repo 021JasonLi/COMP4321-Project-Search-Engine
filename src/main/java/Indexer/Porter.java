@@ -10,6 +10,9 @@ class NewString {
     }
 }
 
+/**
+ * A class to perform stemming on words (Provided by Lab 3).
+ */
 public class Porter {
     private String Clean(String str) {
         int last = str.length();
@@ -329,7 +332,11 @@ public class Porter {
         return str;
     }
 
-
+    /**
+     * Perform stemming on a list of words by striping affixes from the words.
+     * @param words The list of words to be stemmed.
+     * @return The list of words after stemming.
+     */
     public Vector<String> stripAffixes(Vector<String> words) {
         Vector<String> stemmedWords = new Vector<>();
         for (String str : words) {

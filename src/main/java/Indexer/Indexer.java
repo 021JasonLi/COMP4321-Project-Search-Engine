@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 
+/**
+ * An indexer to index the web pages (both title and body).
+ */
 public class Indexer {
 
     private final HashMap<Integer, Vector<Integer>> titleTokenIds;
@@ -23,6 +26,13 @@ public class Indexer {
     private final ForwardIndexDatabase bodyForwardIndexDatabase;
 
 
+    /**
+     * Create an indexer instance.
+     * The title and body tokens are processed by stop word removal and stemming.
+     * They are stored as wordId internally.
+     * @param tokens An array list of title token and body token.
+     * @throws IOException If an I/O error occurs when creating the databases.
+     */
     public Indexer(ArrayList<HashMap<Integer, Vector<String>>> tokens) throws IOException {
         this.stopWordRemoval = new StopWordRemoval();
         this.porter = new Porter();
@@ -59,12 +69,21 @@ public class Indexer {
         }
     }
 
+    /**
+     * Index the web pages (both title and body) by inverted index and forward index.
+     * @throws IOException If an I/O error occurs when indexing the web pages.
+     */
     public void index() throws IOException {
         invertedIndex();
         forwardIndex();
         finalizeAllDatabases();
     }
 
+    /**
+     * Remove stop words and stem the tokens.
+     * @param tokens The tokens to be processed.
+     * @return The tokens after stop word removal and stemming.
+     */
     private HashMap<Integer, Vector<String>> stopStem(HashMap<Integer, Vector<String>> tokens) {
         HashMap<Integer, Vector<String>> result = new HashMap<>();
         for (Integer id : tokens.keySet()) {
@@ -75,6 +94,10 @@ public class Indexer {
         return result;
     }
 
+    /**
+     * Create inverted index for both title and body.
+     * @throws IOException If an I/O error occurs when creating the inverted index.
+     */
     private void invertedIndex() throws IOException {
         for (Integer id : titleTokenIds.keySet()) {
             titleInvertedIndexDatabase.addEntry(titleTokenIds.get(id), id);
@@ -84,6 +107,10 @@ public class Indexer {
         }
     }
 
+    /**
+     * Create forward index for both title and body.
+     * @throws IOException If an I/O error occurs when creating the forward index.
+     */
     private void forwardIndex() throws IOException {
         for (Integer id : titleTokenIds.keySet()) {
             titleForwardIndexDatabase.addEntry(id, titleTokenIds.get(id));
@@ -93,6 +120,9 @@ public class Indexer {
         }
     }
 
+    /**
+     * Finalize all databases.
+     */
     private void finalizeAllDatabases() {
         wordIdDatabase.finish();
         titleInvertedIndexDatabase.finish();

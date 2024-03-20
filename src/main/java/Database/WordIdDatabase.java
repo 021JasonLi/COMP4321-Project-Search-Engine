@@ -13,6 +13,7 @@ public class WordIdDatabase extends AbstractDatabase {
 
     /**
      * Create a new WordIdDatabase instance.
+     * It automatically updates the initial id based on the existing entries.
      * @param databaseName The name of the database (filename of the db file).
      * @param columnName The name of the column in the database.
      * @throws IOException If the database file cannot be created.
@@ -48,6 +49,12 @@ public class WordIdDatabase extends AbstractDatabase {
         }
     }
 
+    /**
+     * Get the id of a word.
+     * @param word The word to get the id. If the word does not exist, return -1.
+     * @return The id of the word.
+     * @throws IOException If the database file cannot be accessed.
+     */
     public int getId(String word) throws IOException {
         if (hashtable.get(word) == null) {
             return -1;
@@ -55,6 +62,12 @@ public class WordIdDatabase extends AbstractDatabase {
         return (int) hashtable.get(word);
     }
 
+    /**
+     * Get the ids of multiple words.
+     * @param words A list of words to get the ids.
+     * @return A list of ids of the words. If the word does not exist, return -1.
+     * @throws IOException If the database file cannot be accessed.
+     */
     public Vector<Integer> getId(Vector<String> words) throws IOException {
         Vector<Integer> ids = new Vector<>();
         for (String word : words) {
@@ -63,6 +76,10 @@ public class WordIdDatabase extends AbstractDatabase {
         return ids;
     }
 
+    /**
+     * Update the initial id based on the existing entries.
+     * @throws IOException If the database file cannot be accessed.
+     */
     private void updateInitId() throws IOException {
         FastIterator iter = hashtable.keys();
         Object key = iter.next();

@@ -199,6 +199,9 @@ public class Spider {
         return tokens;
     }
 
+    /**
+     * Finalize all databases.
+     */
     private void finalizeAllDatabases() {
         urlToPageIdDatabase.finish();
         nodePropertyDatabase.finish();

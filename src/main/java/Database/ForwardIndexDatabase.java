@@ -1,7 +1,5 @@
 package Database;
 
-import jdbm.helper.FastIterator;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Vector;

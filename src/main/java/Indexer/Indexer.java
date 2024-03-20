@@ -46,9 +46,9 @@ public class Indexer {
         this.bodyInvertedIndexDatabase = new InvertedIndexDatabase(
                 "bodyInvertedIndexDatabase", "invertedIndex");
         this.titleForwardIndexDatabase = new ForwardIndexDatabase(
-                "titleForwardIndexDatabase", "forwardIndex");
+                "titleForwardIndexDatabase", "forwardIndex", true);
         this.bodyForwardIndexDatabase = new ForwardIndexDatabase(
-                "bodyForwardIndexDatabase", "forwardIndex");
+                "bodyForwardIndexDatabase", "forwardIndex", true);
 
         // Add all words to the wordIdDatabase
         for (Integer id : titleTokens.keySet()) {

@@ -1,5 +1,7 @@
 package Database;
 
+import jdbm.helper.FastIterator;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Vector;
@@ -10,15 +12,19 @@ import java.util.Vector;
 public class ForwardIndexDatabase extends AbstractDatabase {
 
     /**
-     * Create a forward index database.
-     * Remove all existing entries in the database before creating it.
+     * Create a forward index database. If the database is being re-indexed,
+     * remove all existing entries in the database before creating it.
+     * Otherwise, the existing database will be used for accessing.
      * @param databaseName The name of the database (filename of the db file).
      * @param columnName The name of the column in the database.
      * @throws IOException If an I/O error occurs when creating the database.
      */
-    public ForwardIndexDatabase(String databaseName, String columnName) throws IOException {
+    public ForwardIndexDatabase(String databaseName, String columnName, boolean indexing)
+            throws IOException {
         super(databaseName, columnName);
-        deleteAll(); // we are re-indexing, so we need to clear the database
+        if (indexing) {
+            deleteAll(); // Clear the database to re-index
+        }
     }
 
     /**
@@ -52,6 +58,23 @@ public class ForwardIndexDatabase extends AbstractDatabase {
         for (int wordId : wordIds) {
             addEntry(pageId, wordId);
         }
+    }
+
+    /**
+     * Get all entries in the forward index database.
+     * @return A map of page Id to a map of word Id and frequency.
+     * @throws IOException If an I/O error occurs when getting the entries.
+     */
+    @SuppressWarnings("unchecked")
+    public HashMap<Integer, HashMap<Integer, Integer>> getAllEntries() throws IOException {
+        HashMap<Integer, HashMap<Integer, Integer>> entries = new HashMap<>();
+        FastIterator iter = hashtable.keys();
+        Integer key = (Integer)iter.next();
+        while (key != null) {
+            entries.put(key, (HashMap<Integer, Integer>) hashtable.get(key));
+            key = (Integer)iter.next();
+        }
+        return entries;
     }
 
 }

@@ -77,6 +77,19 @@ public class WordIdDatabase extends AbstractDatabase {
     }
 
     /**
+     * Get the word of an id.
+     * @param id The id to get the word. If the id does not exist, return null.
+     * @return The word of the id.
+     * @throws IOException If the database file cannot be accessed.
+     */
+    public String getWord(int id) throws IOException {
+        if (hashtable.get(id) == null) {
+            return null;
+        }
+        return (String) hashtable.get(id);
+    }
+
+    /**
      * Update the initial id based on the existing entries.
      * @throws IOException If the database file cannot be accessed.
      */

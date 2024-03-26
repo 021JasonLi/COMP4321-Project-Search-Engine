@@ -69,19 +69,24 @@ public class Spider {
                 count++;
                 // Convert URL to page ID and store in database
                 int id = urlToPageIdDatabase.addEntry(url);
-                // Extract properties and store in database
-                HashMap<String, String> properties = extractProperties(url);
-                nodePropertyDatabase.addEntry(id, properties);
                 // Extract links, parent-child database will be constructed later
                 Vector<String> links = extractLinks(url);
                 queue.addAll(links);
                 childLink.put(url, links);
-                // Extract title
-                Vector<String> titleToken = tokenize(properties.get("title"));
-                titleTokens.put(id, titleToken);
-                // Extract body content
-                Vector<String> bodyToken = extractWords(url, titleToken);
-                bodyTokens.put(id, bodyToken);
+                // Extract properties and check if it needs to crawl based on last modified date
+                HashMap<String, String> properties = extractProperties(url);
+                long recordLastModified = nodePropertyDatabase.getLastModified(id);
+                long lastModified = Long.parseLong(properties.get("lastModified"));
+                if (needToCrawl(recordLastModified, lastModified)) {
+                    // Store properties in database
+                    nodePropertyDatabase.addEntry(id, properties);
+                    // Extract title
+                    Vector<String> titleToken = tokenize(properties.get("title"));
+                    titleTokens.put(id, titleToken);
+                    // Extract body content
+                    Vector<String> bodyToken = extractWords(url, titleToken);
+                    bodyTokens.put(id, bodyToken);
+                }
             }
         }
         constructParentChildDatabase(childLink); // Construct parent-child database
@@ -163,6 +168,10 @@ public class Spider {
         }
 
         return properties;
+    }
+
+    private boolean needToCrawl(long recordLastModified, long lastModified) {
+        return (recordLastModified == 0) || (recordLastModified < lastModified);
     }
 
     /**

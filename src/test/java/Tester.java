@@ -29,10 +29,10 @@ public class Tester {
                     "parentToChildDatabase", "parent");
             ForwardIndexDatabase titleForwardIndexDatabase = new ForwardIndexDatabase(
                     "titleForwardIndexDatabase",
-                    "forwardIndex", false);
+                    "forwardIndex");
             ForwardIndexDatabase bodyForwardIndexDatabase = new ForwardIndexDatabase(
                     "bodyForwardIndexDatabase",
-                    "forwardIndex", false);
+                    "forwardIndex");
             WordIdDatabase wordIdDatabase = new WordIdDatabase(
                     "wordIdDatabase", "word");
 

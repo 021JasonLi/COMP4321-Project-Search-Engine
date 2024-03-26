@@ -70,4 +70,15 @@ public class NodePropertyDatabase extends AbstractDatabase {
         return ((HashMap<String, String>) hashtable.get(id)).get("url");
     }
 
+    @SuppressWarnings("unchecked")
+    public long getLastModified(int id) throws IOException {
+        if (hashtable.get(id) == null) {
+            return 0;
+        }
+        if (((HashMap<String, String>) hashtable.get(id)).get("lastModified").equals("unknown")) {
+            return 0;
+        }
+        return Long.parseLong(((HashMap<String, String>) hashtable.get(id)).get("lastModified"));
+    }
+
 }

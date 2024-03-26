@@ -14,11 +14,9 @@ public class InvertedIndexDatabase extends AbstractDatabase {
      * Remove all existing entries in the database before creating it.
      * @param databaseName The name of the database (filename of the db file).
      * @param columnName The name of the column in the database.
-     * @throws IOException If an I/O error occurs when creating the database.
      */
-    public InvertedIndexDatabase(String databaseName, String columnName) throws IOException {
+    public InvertedIndexDatabase(String databaseName, String columnName) {
         super(databaseName, columnName);
-        deleteAll(); // we are re-indexing, so we need to clear the database
     }
 
     /**

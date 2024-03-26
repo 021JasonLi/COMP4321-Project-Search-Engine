@@ -17,14 +17,9 @@ public class ForwardIndexDatabase extends AbstractDatabase {
      * Otherwise, the existing database will be used for accessing.
      * @param databaseName The name of the database (filename of the db file).
      * @param columnName The name of the column in the database.
-     * @throws IOException If an I/O error occurs when creating the database.
      */
-    public ForwardIndexDatabase(String databaseName, String columnName, boolean indexing)
-            throws IOException {
+    public ForwardIndexDatabase(String databaseName, String columnName) {
         super(databaseName, columnName);
-        if (indexing) {
-            deleteAll(); // Clear the database to re-index
-        }
     }
 
     /**
@@ -62,7 +57,7 @@ public class ForwardIndexDatabase extends AbstractDatabase {
 
     /**
      * Get all entries in the forward index database.
-     * @return A map of page Id to a map of word Id and frequency.
+     * @return A map of page ID to a map of word ID and frequency.
      * @throws IOException If an I/O error occurs when getting the entries.
      */
     @SuppressWarnings("unchecked")

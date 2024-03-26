@@ -6,3 +6,6 @@ java -cp ".\libs\*;.\target;." Main
 
 Run the tester (Windows):
 java -cp ".\libs\*;.\target;." Tester
+
+TODO:
+- Phrase search (n-grams)

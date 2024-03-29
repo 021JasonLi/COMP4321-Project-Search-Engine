@@ -51,6 +51,7 @@ public class Spider {
      * and store the results in the databases.
      * @return Title tokens and body tokens of the crawled web pages.
      * @throws IOException If an I/O error occurs when crawling the web pages.
+     * @throws ParserException If an error occurs when parsing the web pages.
      */
     public ArrayList<HashMap<Integer, Vector<String>>> bfs()
             throws IOException, ParserException {
@@ -166,6 +167,12 @@ public class Spider {
         return properties;
     }
 
+    /**
+     * Check if the url needs to be crawled based on the last modified date.
+     * @param recordLastModified The last modified date of the record.
+     * @param lastModified The last modified date of the URL.
+     * @return True if the URL needs to be crawled, false otherwise.
+     */
     private boolean needToCrawl(long recordLastModified, long lastModified) {
         return (recordLastModified == 0) || (recordLastModified < lastModified);
     }

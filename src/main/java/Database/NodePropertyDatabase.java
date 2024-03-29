@@ -70,6 +70,13 @@ public class NodePropertyDatabase extends AbstractDatabase {
         return ((HashMap<String, String>) hashtable.get(id)).get("url");
     }
 
+    /**
+     * Get the last modified date of the page with the given page id.
+     * @param id The unique id of the URL.
+     * @return The last modified date of the page with the given page id in long format.
+     * If the last modified date is unknown, it will return 0.
+     * @throws IOException When there is an error in getting the last modified date from the database.
+     */
     @SuppressWarnings("unchecked")
     public long getLastModified(int id) throws IOException {
         if (hashtable.get(id) == null) {

@@ -47,7 +47,7 @@ public class Tester {
                 printWriter.println(properties.get(i).get("title"));
                 printWriter.println(properties.get(i).get("url"));
                 printWriter.print(new Date(parseLong(properties.get(i).get("lastModified"))) + ", ");
-                printWriter.println(properties.get(i).get("size"));
+                printWriter.println(properties.get(i).get("size") + " Bytes");
                 // Keyword frequency
                 for (int j = 0; j < MAX_KEYWORD_DISPLAY && j < keywords.get(i).size(); j++) {
                     if (j != 0) {

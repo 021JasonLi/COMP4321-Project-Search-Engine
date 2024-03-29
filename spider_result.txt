@@ -34,7 +34,7 @@ https://www.cse.ust.hk/~kwtleung/COMP4321/books/book3.htm
 ----------------------------------------
 Movie Index Page
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
-Tue May 16 13:09:22 HKT 2023, 19.08 KB
+Tue May 16 13:09:22 HKT 2023, 19541 Bytes
 page 1; movi 5; index 1; dinosaur 1; planet 3; 2003 24; isl 1; man 3; tt 1; 2004 33
 https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/1.html
@@ -49,13 +49,13 @@ https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/9.html
 ----------------------------------------
 PG
 https://www.cse.ust.hk/~kwtleung/COMP4321/ust_cse/PG.htm
-Tue May 16 13:03:46 HKT 2023, 3.19 KB
+Tue May 16 13:03:46 HKT 2023, 3267 Bytes
 softwar 1; test 3; oper 1; design 1; analysi 1; depart 3; hkust 1; algorithm 1; addition 2; phd 2
 https://www.cse.ust.hk/~kwtleung/COMP4321/ust_cse.htm
 ----------------------------------------
 UG
 https://www.cse.ust.hk/~kwtleung/COMP4321/ust_cse/UG.htm
-Tue May 16 13:03:46 HKT 2023, 3.97 KB
+Tue May 16 13:03:46 HKT 2023, 4070 Bytes
 softwar 1; design 1; depart 5; hkust 5; present 1; ug 1; regular 1; cours 1; studi 6; offer 3
 https://www.cse.ust.hk/~kwtleung/COMP4321/ust_cse.htm
 ----------------------------------------
@@ -73,127 +73,127 @@ https://www.cse.ust.hk/~kwtleung/COMP4321/news.htm
 ----------------------------------------
 book1
 https://www.cse.ust.hk/~kwtleung/COMP4321/books/book1.htm
-Tue May 16 13:03:16 HKT 2023, 1.58 KB
+Tue May 16 13:03:16 HKT 2023, 1617 Bytes
 book 2; book1 1; i 3; do 1; subject 1; set 1; class 1; 1 1; 2 1; choic 1
 https://www.cse.ust.hk/~kwtleung/COMP4321/books.htm
 ----------------------------------------
 book2
 https://www.cse.ust.hk/~kwtleung/COMP4321/books/book2.htm
-Tue May 16 13:03:16 HKT 2023, 2.04 KB
+Tue May 16 13:03:16 HKT 2023, 2084 Bytes
 inaugur 1; volum 2; oper 1; william 1; 178 1; updat 1; consist 1; prepar 1; book 1; accord 1
 https://www.cse.ust.hk/~kwtleung/COMP4321/books.htm
 ----------------------------------------
 book3
 https://www.cse.ust.hk/~kwtleung/COMP4321/books/book3.htm
-Tue May 16 13:03:16 HKT 2023, 1.95 KB
+Tue May 16 13:03:16 HKT 2023, 1994 Bytes
 design 1; book 2; is 1; formal 1; defini 1; book3 1; cours 1; on 2; numer 1; individu 1
 https://www.cse.ust.hk/~kwtleung/COMP4321/books.htm
 ----------------------------------------
 Dinosaur Planet (2003)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/1.html
-Tue May 16 13:03:16 HKT 2023, 3.52 KB
+Tue May 16 13:03:16 HKT 2023, 3605 Bytes
 new 2; addition 2; movi 8; index 2; dinosaur 27; home 2; planet 11; 2003 3; plai 2; 2004 1
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 Isle of Man TT 2004 Review (2004)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/2.html
-Tue May 16 13:03:26 HKT 2023, 2.80 KB
+Tue May 16 13:03:26 HKT 2023, 2868 Bytes
 new 2; addition 2; movi 7; index 2; home 2; isl 7; man 7; tt 7; plai 2; 2004 10
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 Character (1997)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/3.html
-Tue May 16 13:03:36 HKT 2023, 3.91 KB
+Tue May 16 13:03:36 HKT 2023, 4008 Bytes
 face 1; new 2; movi 7; index 2; 2003 1; plai 3; 2004 2; charact 42; 1997 3; the 7
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 Paula Abdul's Get Up and Dance (1994)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/4.html
-Tue May 16 13:03:38 HKT 2023, 2.75 KB
+Tue May 16 13:03:38 HKT 2023, 2820 Bytes
 new 2; addition 2; movi 7; index 2; home 2; 2003 1; plai 2; charact 2; paula 8; abdul 9
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 The Rise and Fall of ECW (2004)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/5.html
-Tue May 16 13:03:38 HKT 2023, 3.84 KB
+Tue May 16 13:03:38 HKT 2023, 3928 Bytes
 new 3; movi 8; index 2; plai 2; 2004 4; charact 2; the 27; rise 28; fall 28; ecw 8
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 Sick (1997)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/6.html
-Tue May 16 13:03:40 HKT 2023, 5.12 KB
+Tue May 16 13:03:40 HKT 2023, 5243 Bytes
 volum 2; funni 1; devil 1; new 3; movi 7; index 2; 2003 3; man 2; plai 3; 2004 3
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 8 Man (1992)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/7.html
-Tue May 16 13:03:40 HKT 2023, 3.42 KB
+Tue May 16 13:03:40 HKT 2023, 3498 Bytes
 face 1; new 2; movi 7; index 2; man 15; plai 2; 2004 1; charact 2; 1997 1; the 4
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 What the #$*! Do We Know!? (2004)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/8.html
-Tue May 16 13:03:42 HKT 2023, 4.05 KB
+Tue May 16 13:03:42 HKT 2023, 4147 Bytes
 should 1; fate 1; but 1; termin 1; digit 1; new 3; think 2; viciou 1; movi 7; try 1
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 Class of Nuke 'Em High 2 (1991)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/9.html
-Tue May 16 13:03:44 HKT 2023, 6.91 KB
+Tue May 16 13:03:44 HKT 2023, 7075 Bytes
 page 1; updat 2; new 4; movi 10; index 2; review 3; charact 2; chemic 1; 1997 1; the 6
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 Fighter (2001)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/10.html
-Tue May 16 13:03:16 HKT 2023, 12.89 KB
+Tue May 16 13:03:16 HKT 2023, 13199 Bytes
 confront 1; volum 3; just 1; ryusei 1; ningen 1; zon 1; new 4; zone 1; plane 2; movi 12
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 Full Frame: Documentary Shorts (1999)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/11.html
-Tue May 16 13:03:18 HKT 2023, 2.64 KB
+Tue May 16 13:03:18 HKT 2023, 2700 Bytes
 new 2; addition 2; movi 7; index 2; present 1; home 2; plai 2; 2004 1; charact 2; all 1
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 My Favorite Brunette (1947)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/12.html
-Tue May 16 13:03:18 HKT 2023, 6.28 KB
+Tue May 16 13:03:18 HKT 2023, 6432 Bytes
 funni 1; page 1; updat 3; new 3; plane 1; movi 13; index 2; wear 1; 1932 1; shot 1
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 Lord of the Rings: The Return of the King: Extended Edition: Bonus Material (2003)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/13.html
-Tue May 16 13:03:20 HKT 2023, 2.93 KB
+Tue May 16 13:03:20 HKT 2023, 2997 Bytes
 new 2; addition 2; movi 8; index 2; home 2; 2003 3; plai 2; charact 2; the 8; all 1
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 Nature: Antarctica (1982)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/14.html
-Tue May 16 13:03:20 HKT 2023, 3.62 KB
+Tue May 16 13:03:20 HKT 2023, 3711 Bytes
 journal 1; new 2; 1986 1; addition 2; movi 7; histori 1; index 2; home 2; plai 2; 2004 2
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 Neil Diamond: Greatest Hits Live (1988)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/15.html
-Tue May 16 13:03:20 HKT 2023, 5.29 KB
+Tue May 16 13:03:20 HKT 2023, 5415 Bytes
 page 1; updat 2; new 4; movi 8; index 2; present 1; like 1; plai 3; review 3; charact 1
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 Screamers (1996)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/16.html
-Tue May 16 13:03:22 HKT 2023, 3.65 KB
+Tue May 16 13:03:22 HKT 2023, 3737 Bytes
 new 2; 1986 1; addition 2; movi 8; index 2; home 2; 2003 1; plai 2; charact 2; 1997 2
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 7 Seconds (2005)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/17.html
-Tue May 16 13:03:22 HKT 2023, 3.44 KB
+Tue May 16 13:03:22 HKT 2023, 3521 Bytes
 new 2; 1986 1; addition 2; movi 7; index 2; home 2; 2003 1; 1974 1; plai 2; 2004 2
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------
 Immortal Beloved (1994)
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie/18.html
-Tue May 16 13:03:24 HKT 2023, 7.41 KB
+Tue May 16 13:03:24 HKT 2023, 7583 Bytes
 page 1; updat 3; new 3; movi 12; index 2; man 1; review 3; charact 1; johanna 2; 1994 5
 https://www.cse.ust.hk/~kwtleung/COMP4321/Movie.htm
 ----------------------------------------

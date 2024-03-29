@@ -159,12 +159,8 @@ public class Spider {
         long size = connection.getContentLengthLong();
         if (size == -1) {
             properties.put("size", "unknown");
-        } else if (size < 1024) {
-            String sizeString = size + " Bytes";
-            properties.put("size", sizeString);
         } else {
-            String sizeString = String.format("%.2f KB", size / 1024.0);
-            properties.put("size", sizeString);
+            properties.put("size", Long.toString(size));
         }
 
         return properties;

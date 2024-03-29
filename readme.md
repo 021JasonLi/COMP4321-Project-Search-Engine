@@ -14,35 +14,35 @@ In the root directory of the folder:
 
 * Compile the project 
 ```shell
-javac -cp .\libs\* -d .\target\ "@sources.txt"
+javac -cp ./libs/* -d ./target/ "@sources.txt"
 ```
 
 * Run the project
 ```shell
-java -cp ".\libs\*;.\target;." Main
+java -cp "./libs/*;./target;." Main
 ```
 
 * Run the tester
 ```shell
-java -cp ".\libs\*;.\target;." Tester
+java -cp "./libs/*;./target;." Tester
 ```
 
-### Macs and Linux
+### Macs
 In the root directory of the folder:
 
 * Compile the project
 ```shell
-???
+javac -cp ./libs/* -d ./target/ @sources.txt
 ```
 
 * Run the project
 ```shell
-???
+java -cp ./libs/*:./target:. Main
 ```
 
 * Run the tester
 ```shell
-???
+java -cp ./libs/*:./target:. Tester
 ```
 
 ## Folders

@@ -33,7 +33,8 @@ public class Indexer {
      * @param tokens An array list of title token and body token.
      * @throws IOException If an I/O error occurs when creating the databases.
      */
-    public Indexer(ArrayList<HashMap<Integer, Vector<String>>> tokens) throws IOException {
+    public Indexer(ArrayList<HashMap<Integer, Vector<String>>> tokens)
+            throws IOException {
         this.stopWordRemoval = new StopWordRemoval();
         this.porter = new Porter();
         HashMap<Integer, Vector<String>> titleTokens = stopStem(tokens.get(0));
@@ -84,12 +85,60 @@ public class Indexer {
      * @param tokens The tokens to be processed.
      * @return The tokens after stop word removal and stemming.
      */
-    private HashMap<Integer, Vector<String>> stopStem(HashMap<Integer, Vector<String>> tokens) {
+    private HashMap<Integer, Vector<String>> stopStem(
+            HashMap<Integer, Vector<String>> tokens) {
         HashMap<Integer, Vector<String>> result = new HashMap<>();
+        HashMap<Integer, Vector<String>> biGram = getBiGram(tokens);
+        HashMap<Integer, Vector<String>> triGram = getTriGram(tokens);
         for (Integer id : tokens.keySet()) {
             Vector<String> removedStopWords = stopWordRemoval.removeStopWord(tokens.get(id));
             Vector<String> stemmed = porter.stripAffixes(removedStopWords);
+            stemmed.addAll(biGram.get(id));
+            stemmed.addAll(triGram.get(id));
             result.put(id, stemmed);
+        }
+        return result;
+    }
+
+    private HashMap<Integer, Vector<String>> getBiGram(
+            HashMap<Integer, Vector<String>> tokens) {
+        HashMap<Integer, Vector<String>> result = new HashMap<>();
+        for (Integer id : tokens.keySet()) {
+            Vector<String> biGram = new Vector<>();
+            for (int i = 0; i < tokens.get(id).size() - 1; i++) {
+                String first = tokens.get(id).get(i);
+                String second = tokens.get(id).get(i + 1);
+                if (stopWordRemoval.notContainStopWord(first) &&
+                        stopWordRemoval.notContainStopWord(second)) {
+                    first = porter.stripAffixes(first);
+                    second = porter.stripAffixes(second);
+                    biGram.add(first + " " + second);
+                }
+            }
+            result.put(id, biGram);
+        }
+        return result;
+    }
+
+    private HashMap<Integer, Vector<String>> getTriGram(
+            HashMap<Integer, Vector<String>> tokens) {
+        HashMap<Integer, Vector<String>> result = new HashMap<>();
+        for (Integer id : tokens.keySet()) {
+            Vector<String> triGram = new Vector<>();
+            for (int i = 0; i < tokens.get(id).size() - 2; i++) {
+                String first = tokens.get(id).get(i);
+                String second = tokens.get(id).get(i + 1);
+                String third = tokens.get(id).get(i + 2);
+                if (stopWordRemoval.notContainStopWord(first) &&
+                        stopWordRemoval.notContainStopWord(second) &&
+                        stopWordRemoval.notContainStopWord(third)) {
+                    first = porter.stripAffixes(first);
+                    second = porter.stripAffixes(second);
+                    third = porter.stripAffixes(third);
+                    triGram.add(first + " " + second + " " + third);
+                }
+            }
+            result.put(id, triGram);
         }
         return result;
     }

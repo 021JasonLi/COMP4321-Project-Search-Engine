@@ -43,4 +43,8 @@ public class StopWordRemoval {
         return result;
     }
 
+    public boolean notContainStopWord(String words) {
+        return !stopWords.contains(words);
+    }
+
 }

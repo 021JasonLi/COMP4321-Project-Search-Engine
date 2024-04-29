@@ -340,24 +340,19 @@ public class Porter {
     public Vector<String> stripAffixes(Vector<String> words) {
         Vector<String> stemmedWords = new Vector<>();
         for (String str : words) {
-            String stemmed = stripAffixes(str);
-            if (!stemmed.isEmpty()) {
-                stemmedWords.add(stemmed);
+            str = str.toLowerCase();
+            str = Clean(str);
+            if ((str.length() > 2)) {
+                str = stripPrefixes(str);
+                if (!str.isEmpty()) {
+                    str = stripSuffixes(str);
+                }
+            }
+            if (!str.isEmpty()) {
+                stemmedWords.add(str);
             }
         }
         return stemmedWords;
-    }
-
-    public String stripAffixes(String word) {
-        word = word.toLowerCase();
-        word = Clean(word);
-        if ((word.length() > 2)) {
-            word = stripPrefixes(word);
-            if (!word.isEmpty()) {
-                word = stripSuffixes(word);
-            }
-        }
-        return word;
     }
 
 }

@@ -91,11 +91,11 @@ public class Indexer {
         HashMap<Integer, Vector<String>> biGram = getBiGram(tokens);
         HashMap<Integer, Vector<String>> triGram = getTriGram(tokens);
         for (Integer id : tokens.keySet()) {
-            Vector<String> removedStopWords = stopWordRemoval.removeStopWord(tokens.get(id));
-            Vector<String> stemmed = porter.stripAffixes(removedStopWords);
-            stemmed.addAll(biGram.get(id));
-            stemmed.addAll(triGram.get(id));
-            result.put(id, stemmed);
+            Vector<String> stemmed = porter.stripAffixes(tokens.get(id));
+            Vector<String> removedStopWords = stopWordRemoval.removeStopWord(stemmed);
+            removedStopWords.addAll(biGram.get(id));
+            removedStopWords.addAll(triGram.get(id));
+            result.put(id, removedStopWords);
         }
         return result;
     }
@@ -104,15 +104,18 @@ public class Indexer {
             HashMap<Integer, Vector<String>> tokens) {
         HashMap<Integer, Vector<String>> result = new HashMap<>();
         for (Integer id : tokens.keySet()) {
+            if (tokens.get(id).size() < 2) {
+                result.put(id, new Vector<>());
+                continue;
+            }
             Vector<String> biGram = new Vector<>();
             for (int i = 0; i < tokens.get(id).size() - 1; i++) {
-                String first = tokens.get(id).get(i);
-                String second = tokens.get(id).get(i + 1);
-                if (stopWordRemoval.notContainStopWord(first) &&
-                        stopWordRemoval.notContainStopWord(second)) {
-                    first = porter.stripAffixes(first);
-                    second = porter.stripAffixes(second);
-                    biGram.add(first + " " + second);
+                Vector<String> biGramPair = new Vector<>();
+                biGramPair.add(tokens.get(id).get(i));
+                biGramPair.add(tokens.get(id).get(i + 1));
+                Vector<String> stemmed = porter.stripAffixes(biGramPair);
+                if (stemmed.size() == 2 && stopWordRemoval.notContainStopWord(stemmed)) {
+                    biGram.add(stemmed.get(0) + " " + stemmed.get(1));
                 }
             }
             result.put(id, biGram);
@@ -124,18 +127,19 @@ public class Indexer {
             HashMap<Integer, Vector<String>> tokens) {
         HashMap<Integer, Vector<String>> result = new HashMap<>();
         for (Integer id : tokens.keySet()) {
+            if (tokens.get(id).size() < 3) {
+                result.put(id, new Vector<>());
+                continue;
+            }
             Vector<String> triGram = new Vector<>();
             for (int i = 0; i < tokens.get(id).size() - 2; i++) {
-                String first = tokens.get(id).get(i);
-                String second = tokens.get(id).get(i + 1);
-                String third = tokens.get(id).get(i + 2);
-                if (stopWordRemoval.notContainStopWord(first) &&
-                        stopWordRemoval.notContainStopWord(second) &&
-                        stopWordRemoval.notContainStopWord(third)) {
-                    first = porter.stripAffixes(first);
-                    second = porter.stripAffixes(second);
-                    third = porter.stripAffixes(third);
-                    triGram.add(first + " " + second + " " + third);
+                Vector<String> triGramPair = new Vector<>();
+                triGramPair.add(tokens.get(id).get(i));
+                triGramPair.add(tokens.get(id).get(i + 1));
+                triGramPair.add(tokens.get(id).get(i + 2));
+                Vector<String> stemmed = porter.stripAffixes(triGramPair);
+                if (stemmed.size() == 3 && stopWordRemoval.notContainStopWord(stemmed)) {
+                    triGram.add(stemmed.get(0) + " " + stemmed.get(1) + " " + stemmed.get(2));
                 }
             }
             result.put(id, triGram);

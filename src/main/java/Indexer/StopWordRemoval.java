@@ -36,15 +36,20 @@ public class StopWordRemoval {
     public Vector<String> removeStopWord(Vector<String> words) {
         Vector<String> result = new Vector<>();
         for (String word : words) {
-            if (!stopWords.contains(word)) {
+            if (!stopWords.contains(word.toLowerCase())) {
                 result.add(word);
             }
         }
         return result;
     }
 
-    public boolean notContainStopWord(String words) {
-        return !stopWords.contains(words);
+    public boolean notContainStopWord(Vector<String> words) {
+        for (String word : words) {
+            if (stopWords.contains(word.toLowerCase())) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.Vector;
  */
 public class Main {
     public static final String URL = "https://www.cse.ust.hk/~kwtleung/COMP4321/testpage.htm";
-    public static final int MAX_INDEX_PAGES = 30;
+    public static final int MAX_INDEX_PAGES = 300;
 
     public static void main(String[] args) {
         try {
@@ -19,6 +19,7 @@ public class Main {
             ArrayList<HashMap<Integer, Vector<String>>> result = spider.bfs();
             Indexer indexer = new Indexer(result);
             indexer.index();
+            System.out.println("Indexing completed.");
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }

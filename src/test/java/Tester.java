@@ -60,7 +60,9 @@ public class Tester {
                 }
                 printWriter.println();
                 // Child links
-                for (int j = 0; j < MAX_CHILD_LINK_DISPLAY && j < childLinks.get(i).size(); j++) {
+                for (int j = 0; j < MAX_CHILD_LINK_DISPLAY &&
+                        childLinks.get(i) != null &&
+                        j < childLinks.get(i).size(); j++) {
                     printWriter.println(
                             nodePropertyDatabase.getUrl((int)childLinks.get(i).toArray()[j]));
                 }

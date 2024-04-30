@@ -91,11 +91,12 @@ public class Indexer {
         HashMap<Integer, Vector<String>> biGram = getBiGram(tokens);
         HashMap<Integer, Vector<String>> triGram = getTriGram(tokens);
         for (Integer id : tokens.keySet()) {
-            Vector<String> stemmed = porter.stripAffixes(tokens.get(id));
-            Vector<String> removedStopWords = stopWordRemoval.removeStopWord(stemmed);
-            removedStopWords.addAll(biGram.get(id));
-            removedStopWords.addAll(triGram.get(id));
-            result.put(id, removedStopWords);
+            Vector<String> removedSymbols = porter.removeSymbols(tokens.get(id));
+            Vector<String> removedStopWords = stopWordRemoval.removeStopWord(removedSymbols);
+            Vector<String> stemmed = porter.stripAffixes(removedStopWords);
+            stemmed.addAll(biGram.get(id));
+            stemmed.addAll(triGram.get(id));
+            result.put(id, stemmed);
         }
         return result;
     }
@@ -113,9 +114,12 @@ public class Indexer {
                 Vector<String> biGramPair = new Vector<>();
                 biGramPair.add(tokens.get(id).get(i));
                 biGramPair.add(tokens.get(id).get(i + 1));
-                Vector<String> stemmed = porter.stripAffixes(biGramPair);
-                if (stemmed.size() == 2 && stopWordRemoval.notContainStopWord(stemmed)) {
-                    biGram.add(stemmed.get(0) + " " + stemmed.get(1));
+                biGramPair = porter.removeSymbols(biGramPair);
+                if (stopWordRemoval.notContainStopWord(biGramPair)) {
+                    Vector<String> stemmed = porter.stripAffixes(biGramPair);
+                    if (stemmed.size() == 2) {
+                        biGram.add(stemmed.get(0) + " " + stemmed.get(1));
+                    }
                 }
             }
             result.put(id, biGram);
@@ -137,9 +141,12 @@ public class Indexer {
                 triGramPair.add(tokens.get(id).get(i));
                 triGramPair.add(tokens.get(id).get(i + 1));
                 triGramPair.add(tokens.get(id).get(i + 2));
-                Vector<String> stemmed = porter.stripAffixes(triGramPair);
-                if (stemmed.size() == 3 && stopWordRemoval.notContainStopWord(stemmed)) {
-                    triGram.add(stemmed.get(0) + " " + stemmed.get(1) + " " + stemmed.get(2));
+                triGramPair = porter.removeSymbols(triGramPair);
+                if (stopWordRemoval.notContainStopWord(triGramPair)) {
+                    Vector<String> stemmed = porter.stripAffixes(triGramPair);
+                    if (stemmed.size() == 3) {
+                        triGram.add(stemmed.get(0) + " " + stemmed.get(1) + " " + stemmed.get(2));
+                    }
                 }
             }
             result.put(id, triGram);

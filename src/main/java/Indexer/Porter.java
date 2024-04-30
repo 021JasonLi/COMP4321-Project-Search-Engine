@@ -355,4 +355,12 @@ public class Porter {
         return stemmedWords;
     }
 
+    public Vector<String> removeSymbols(Vector<String> words) {
+        Vector<String> result = new Vector<>();
+        for (String word : words) {
+            result.add(word.replaceAll("[^a-zA-Z0-9]", "").toLowerCase());
+        }
+        return result;
+    }
+
 }

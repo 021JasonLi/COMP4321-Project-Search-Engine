@@ -52,4 +52,8 @@ public class StopWordRemoval {
         return true;
     }
 
+    public boolean notStopWord(String word) {
+        return !stopWords.contains(word.toLowerCase());
+    }
+
 }

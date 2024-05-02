@@ -355,12 +355,28 @@ public class Porter {
         return stemmedWords;
     }
 
+    public String stripAffixes(String word) {
+        word = word.toLowerCase();
+        word = Clean(word);
+        if ((word.length() > 2)) {
+            word = stripPrefixes(word);
+            if (!word.isEmpty()) {
+                word = stripSuffixes(word);
+            }
+        }
+        return word;
+    }
+
     public Vector<String> removeSymbols(Vector<String> words) {
         Vector<String> result = new Vector<>();
         for (String word : words) {
             result.add(word.replaceAll("[^a-zA-Z0-9]", "").toLowerCase());
         }
         return result;
+    }
+
+    public String removeSymbols(String word) {
+        return word.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
     }
 
 }

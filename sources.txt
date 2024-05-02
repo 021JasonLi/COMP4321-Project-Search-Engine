@@ -9,5 +9,7 @@
 ./src/main/java/Indexer/Indexer.java
 ./src/main/java/Indexer/Porter.java
 ./src/main/java/Indexer/StopWordRemoval.java
+./src/main/java/SearchEngine/Retrieval.java
+./src/main/java/SearchEngine/WeightCalculator.java
 ./src/main/java/Spider/Spider.java
 ./src/test/java/Tester.java

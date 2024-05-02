@@ -52,4 +52,12 @@ public class InvertedIndexDatabase extends AbstractDatabase {
         }
     }
 
+    @SuppressWarnings("unchecked")
+    public HashMap<Integer, Integer> getEntry(int wordId) throws IOException {
+        if (hashtable.get(wordId) == null) {
+            return null;
+        }
+        return (HashMap<Integer, Integer>) hashtable.get(wordId);
+    }
+
 }

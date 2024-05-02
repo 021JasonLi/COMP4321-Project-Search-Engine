@@ -42,6 +42,11 @@ public class NodePropertyDatabase extends AbstractDatabase {
         hashtable.put(id, properties);
     }
 
+    @SuppressWarnings("unchecked")
+    public HashMap<String, String> getEntry(int id) throws IOException {
+        return (HashMap<String, String>) hashtable.get(id);
+    }
+
     /**
      * Get all properties entries in the database.
      * @return A map of all page ids to their properties.

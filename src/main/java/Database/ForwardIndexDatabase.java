@@ -73,4 +73,15 @@ public class ForwardIndexDatabase extends AbstractDatabase {
         return entries;
     }
 
+    /**
+     * Get an entry in the forward index database.
+     * @param pageId The page ID.
+     * @return A map of word ID and frequency.
+     * @throws IOException If an I/O error occurs when getting the entry.
+     */
+    @SuppressWarnings("unchecked")
+    public HashMap<Integer, Integer> getEntry(int pageId) throws IOException {
+        return (HashMap<Integer, Integer>) hashtable.get(pageId);
+    }
+
 }

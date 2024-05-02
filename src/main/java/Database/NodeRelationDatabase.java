@@ -56,5 +56,16 @@ public class NodeRelationDatabase extends AbstractDatabase {
         return result;
     }
 
+    /**
+     * Get all the child nodes of a parent node or vice versa from the database.
+     * @param key The parent or child node.
+     * @return A set of child or parent nodes.
+     * @throws IOException When there is an error in accessing the database.
+     */
+    @SuppressWarnings("unchecked")
+    public HashSet<Integer> getEntry(int key) throws IOException {
+        return (HashSet<Integer>) hashtable.get(key);
+    }
+
 }
 

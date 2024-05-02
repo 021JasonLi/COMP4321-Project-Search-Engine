@@ -27,6 +27,11 @@ java -cp "./libs/*;./target;." Main
 java -cp "./libs/*;./target;." Tester
 ```
 
+* Run the search engine
+```shell
+java -cp "./libs/*;./target;." SearchEngine.Retrieval
+```
+
 ## Folders
 
 * `./db` contains the db files generated in the spider and indexer.

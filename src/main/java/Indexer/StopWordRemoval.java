@@ -10,7 +10,8 @@ import java.util.Vector;
  * A stop word removal class to remove stop words from a list of words.
  */
 public class StopWordRemoval {
-    private final static String STOP_WORD_LIST_DIRECTORY = "./src/main/resources/stopwords.txt";
+    private final static String STOP_WORD_LIST_DIRECTORY =
+            "./src/main/resources/stopwords.txt";
     private final HashSet<String> stopWords;
 
     /**
@@ -43,6 +44,12 @@ public class StopWordRemoval {
         return result;
     }
 
+    /**
+     * Check if a list of words contains any stop word.
+     * @param words A list of words to be checked.
+     * @return True if the list of words does not contain any stop word.
+     * False if it contains any stop word.
+     */
     public boolean notContainStopWord(Vector<String> words) {
         for (String word : words) {
             if (stopWords.contains(word.toLowerCase())) {
@@ -52,6 +59,11 @@ public class StopWordRemoval {
         return true;
     }
 
+    /**
+     * Check if a word is a stop word.
+     * @param word A word to be checked.
+     * @return True if the word is not a stop word. False otherwise.
+     */
     public boolean notStopWord(String word) {
         return !stopWords.contains(word.toLowerCase());
     }

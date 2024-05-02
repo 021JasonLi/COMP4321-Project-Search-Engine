@@ -17,7 +17,8 @@ public class UrlToPageIdDatabase extends AbstractDatabase {
      * @param objectName The name of the database object.
      * @throws IOException When there is an error in creating the database.
      */
-    public UrlToPageIdDatabase(String managerName, String objectName) throws IOException {
+    public UrlToPageIdDatabase(String managerName, String objectName)
+            throws IOException {
         super(managerName, objectName);
         updateInitId();
     }

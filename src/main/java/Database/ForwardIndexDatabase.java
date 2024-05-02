@@ -49,7 +49,8 @@ public class ForwardIndexDatabase extends AbstractDatabase {
      * @param wordIds The list of word IDs.
      * @throws IOException If an I/O error occurs when adding the entry.
      */
-    public void addEntry(int pageId, Vector<Integer> wordIds) throws IOException {
+    public void addEntry(int pageId, Vector<Integer> wordIds)
+            throws IOException {
         for (int wordId : wordIds) {
             addEntry(pageId, wordId);
         }

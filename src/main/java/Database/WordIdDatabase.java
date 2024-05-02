@@ -18,7 +18,8 @@ public class WordIdDatabase extends AbstractDatabase {
      * @param columnName The name of the column in the database.
      * @throws IOException If the database file cannot be created.
      */
-    public WordIdDatabase(String databaseName, String columnName) throws IOException {
+    public WordIdDatabase(String databaseName, String columnName)
+            throws IOException {
         super(databaseName, columnName);
         updateInitId();
     }

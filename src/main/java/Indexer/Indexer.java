@@ -29,7 +29,8 @@ public class Indexer {
     /**
      * Create an indexer instance.
      * The title and body tokens are processed by stop word removal and stemming.
-     * They are stored as wordId internally.
+     * Bi-gram and tri-gram are also generated.
+     * Each word and n-gram are stored as wordId internally.
      * @param tokens An array list of title token and body token.
      * @throws IOException If an I/O error occurs when creating the databases.
      */
@@ -101,6 +102,12 @@ public class Indexer {
         return result;
     }
 
+    /**
+     * Get bi-gram from the tokens. If the bi-gram contains stop words, it will be removed.
+     * Each word in the bi-gram will then be stemmed.
+     * @param tokens The tokens to generate bi-gram.
+     * @return The bi-gram after stop word removal and stemming.
+     */
     private HashMap<Integer, Vector<String>> getBiGram(
             HashMap<Integer, Vector<String>> tokens) {
         HashMap<Integer, Vector<String>> result = new HashMap<>();
@@ -127,6 +134,12 @@ public class Indexer {
         return result;
     }
 
+    /**
+     * Get tri-gram from the tokens. If the tri-gram contains stop words, it will be removed.
+     * Each word in the tri-gram will then be stemmed.
+     * @param tokens The tokens to generate tri-gram.
+     * @return The tri-gram after stop word removal and stemming.
+     */
     private HashMap<Integer, Vector<String>> getTriGram(
             HashMap<Integer, Vector<String>> tokens) {
         HashMap<Integer, Vector<String>> result = new HashMap<>();

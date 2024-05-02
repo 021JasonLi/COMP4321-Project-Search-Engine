@@ -9,6 +9,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Vector;
 
+/**
+ * The class to calculate the weight of the terms in the query.
+ */
 public class WeightCalculator {
     private final NodePropertyDatabase nodePropertyDatabase;
     private final InvertedIndexDatabase titleInvertedIndexDatabase;
@@ -19,6 +22,10 @@ public class WeightCalculator {
 
     private final int totalNumberOfDocuments;
 
+    /**
+     * The constructor to initialize the databases.
+     * @throws IOException if there is an error in the database.
+     */
     public WeightCalculator() throws IOException {
         nodePropertyDatabase = new NodePropertyDatabase(
                 "nodePropertyDatabase", "property");
@@ -35,6 +42,15 @@ public class WeightCalculator {
         totalNumberOfDocuments = nodePropertyDatabase.getAllEntries().size();
     }
 
+    /**
+     * Get the term weight of the query.
+     * The term weight is calculated as the term frequency (TF) multiplied by the
+     * inverse document frequency (IDF) divided by the maximum term frequency (maxTF).
+     * @param query the query to search
+     * @param title whether the query is for the title or the body
+     * @return the term weight of the query
+     * @throws IOException if there is an error in the database
+     */
     public HashMap<Integer, HashMap<Integer, Double>> getTermWeight (
             Vector<String> query, boolean title) throws IOException {
         HashMap<Integer, HashMap<Integer, Double>> termWeight = new HashMap<>();
@@ -53,6 +69,13 @@ public class WeightCalculator {
         return termWeight;
     }
 
+    /**
+     * Get the query weight of the query.
+     * It is the number of times each word appears in the query.
+     * @param query the query to be calculated
+     * @return the query weight of the query
+     * @throws IOException if there is an error in the database
+     */
     public HashMap<Integer, Integer> getQueryWeight(Vector<String> query)
             throws IOException {
         HashMap<Integer, Integer> queryWeight = new HashMap<>();
@@ -65,6 +88,13 @@ public class WeightCalculator {
         return queryWeight;
     }
 
+    /**
+     * Get the term frequency (TF) of the query on each page.
+     * @param query the query to be calculated
+     * @param title whether the query is for the title or the body
+     * @return the term frequency (TF) of the query
+     * @throws IOException if there is an error in the database
+     */
     private HashMap<Integer, HashMap<Integer, Integer>> getTF(
             Vector<String> query, boolean title) throws IOException {
         HashMap<Integer, HashMap<Integer, Integer>> tf = new HashMap<>();
@@ -85,6 +115,12 @@ public class WeightCalculator {
         return tf;
     }
 
+    /**
+     * Get the maximum term frequency (maxTF) for each page.
+     * @param title whether the query is for the title or the body
+     * @return the maximum term frequency (maxTF) for each page
+     * @throws IOException if there is an error in the database
+     */
     private HashMap<Integer, Integer> getMaxTF(boolean title)
             throws IOException {
         HashMap<Integer, Integer> maxTF = new HashMap<>();
@@ -104,6 +140,13 @@ public class WeightCalculator {
         return maxTF;
     }
 
+    /**
+     * Get the document frequency (DF) of the query.
+     * @param query the query to be calculated
+     * @param title whether the query is for the title or the body
+     * @return the document frequency (DF) of the query
+     * @throws IOException if there is an error in the database
+     */
     private HashMap<Integer, Integer> getDF(Vector<String> query,
                                             boolean title)
             throws IOException {
@@ -129,6 +172,15 @@ public class WeightCalculator {
         return df;
     }
 
+    /**
+     * Get the inverse document frequency (IDF) of the query.
+     * It is calculated as the logarithm (base 2) of the total number of documents divided by the
+     * document frequency (DF) of the query.
+     * @param query the query to be calculated
+     * @param title whether the query is for the title or the body
+     * @return the inverse document frequency (IDF) of the query
+     * @throws IOException if there is an error in the database
+     */
     private HashMap<Integer, Double> getIDF(Vector<String> query,
                                             boolean title)
             throws IOException {
@@ -147,6 +199,9 @@ public class WeightCalculator {
         return idf;
     }
 
+    /**
+     * Finalize all the databases.
+     */
     public void finalizeAllDatabases() {
         nodePropertyDatabase.finish();
         titleInvertedIndexDatabase.finish();

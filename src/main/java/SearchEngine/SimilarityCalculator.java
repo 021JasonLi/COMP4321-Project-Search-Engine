@@ -2,10 +2,21 @@ package SearchEngine;
 
 import java.util.HashMap;
 
+/**
+ * The class to calculate the similarity between the query and the pages.
+ */
 public class SimilarityCalculator {
     private static final double TITLE_WEIGHT = 0.6;
     private static final double BODY_WEIGHT = 0.4;
 
+    /**
+     * Calculate the similarity score between the query and the pages based on the title and the body.
+     * Title weight multiplier is 0.6 and body weight multiplier is 0.4.
+     * @param titleTermWeight the term weight of the title
+     * @param bodyTermWeight the term weight of the body
+     * @param queryWeight the term weight of the query
+     * @return the similarity score between the query and the pages
+     */
     public static HashMap<Integer, Double> getSimilarityScore(
             HashMap<Integer, HashMap<Integer, Double>> titleTermWeight,
             HashMap<Integer, HashMap<Integer, Double>> bodyTermWeight,
@@ -21,6 +32,12 @@ public class SimilarityCalculator {
         return similarityScore;
     }
 
+    /**
+     * Calculate the cosine similarity between the query and the pages.
+     * @param termWeight the term weight of the pages
+     * @param queryWeight the term weight of the query
+     * @return the cosine similarity between the query and the pages
+     */
     public static HashMap<Integer, Double> getCosineSimilarity(
             HashMap<Integer, HashMap<Integer, Double>> termWeight,
             HashMap<Integer, Integer> queryWeight) {

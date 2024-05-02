@@ -110,7 +110,9 @@ public class Porter {
             return false;
 
         if ((!vowel(str.charAt(length - 1), str.charAt(length - 2)))
-                && (str.charAt(length - 1) != 'w') && (str.charAt(length - 1) != 'x') && (str.charAt(length - 1) != 'y')
+                && (str.charAt(length - 1) != 'w')
+                && (str.charAt(length - 1) != 'x')
+                && (str.charAt(length - 1) != 'y')
                 && (vowel(str.charAt(length - 2), str.charAt(length - 3)))) {
 
             if (length == 3) {
@@ -165,12 +167,16 @@ public class Porter {
                     if (str.length() == 1)
                         return str;
 
-                    if ((hasSuffix(str, "at", stem)) || (hasSuffix(str, "bl", stem)) || (hasSuffix(str, "iz", stem))) {
+                    if ((hasSuffix(str, "at", stem))
+                            || (hasSuffix(str, "bl", stem))
+                            || (hasSuffix(str, "iz", stem))) {
                         str += "e";
                     } else {
                         int length = str.length();
                         if ((str.charAt(length - 1) == str.charAt(length - 2))
-                                && (str.charAt(length - 1) != 'l') && (str.charAt(length - 1) != 's') && (str.charAt(length - 1) != 'z')) {
+                                && (str.charAt(length - 1) != 'l')
+                                && (str.charAt(length - 1) != 's')
+                                && (str.charAt(length - 1) != 'z')) {
                             tmp = new StringBuilder();
                             for (int i = 0; i < str.length() - 1; i++)
                                 tmp.append(str.charAt(i));
@@ -254,7 +260,8 @@ public class Porter {
 
     private String step4(String str) {
 
-        String[] suffixes = {"al", "ance", "ence", "er", "ic", "able", "ible", "ant", "ement", "ment", "ent", "sion", "tion",
+        String[] suffixes = {"al", "ance", "ence", "er", "ic", "able", "ible",
+                "ant", "ement", "ment", "ent", "sion", "tion",
                 "ou", "ism", "ate", "iti", "ous", "ive", "ize", "ise"};
 
         NewString stem = new NewString();
@@ -290,7 +297,9 @@ public class Porter {
 
         if (str.length() == 1)
             return str;
-        if ((str.charAt(str.length() - 1) == 'l') && (str.charAt(str.length() - 2) == 'l') && (measure(str) > 1))
+        if ((str.charAt(str.length() - 1) == 'l')
+                && (str.charAt(str.length() - 2) == 'l')
+                && (measure(str) > 1))
             if (measure(str) > 1) {/* measure(str)==measure(stem) if ends in vowel */
                 StringBuilder tmp = new StringBuilder();
                 for (int i = 0; i < str.length() - 1; i++)
@@ -302,7 +311,8 @@ public class Porter {
 
     private String stripPrefixes(String str) {
 
-        String[] prefixes = {"kilo", "micro", "milli", "intra", "ultra", "mega", "nano", "pico", "pseudo"};
+        String[] prefixes = {"kilo", "micro", "milli", "intra", "ultra", "mega",
+                "nano", "pico", "pseudo"};
 
         for (String prefix : prefixes) {
             if (str.startsWith(prefix)) {
@@ -355,6 +365,11 @@ public class Porter {
         return stemmedWords;
     }
 
+    /**
+     * Perform stemming on a word by striping affixes from the word.
+     * @param word The word to be stemmed.
+     * @return The word after stemming.
+     */
     public String stripAffixes(String word) {
         word = word.toLowerCase();
         word = Clean(word);
@@ -367,6 +382,11 @@ public class Porter {
         return word;
     }
 
+    /**
+     * Remove symbols from a list of words.
+     * @param words The list of words to remove symbols.
+     * @return The list of words after removing symbols.
+     */
     public Vector<String> removeSymbols(Vector<String> words) {
         Vector<String> result = new Vector<>();
         for (String word : words) {
@@ -375,6 +395,11 @@ public class Porter {
         return result;
     }
 
+    /**
+     * Remove symbols from a word.
+     * @param word The word to remove symbols.
+     * @return The word after removing symbols.
+     */
     public String removeSymbols(String word) {
         return word.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
     }

@@ -6,6 +6,9 @@ import Indexer.StopWordRemoval;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * The main class to start the retrieval process.
+ */
 public class Retrieval {
     private static final int MAX_RESULT = 50;
 
@@ -13,12 +16,20 @@ public class Retrieval {
     private final Porter porter;
     private final WeightCalculator weightCalculator;
 
+    /**
+     * Constructor to initialize the stop word removal, stemming, and weight calculator.
+     * @throws IOException if an I/O error occurs
+     */
     public Retrieval() throws IOException {
         stopWordRemoval = new StopWordRemoval();
         porter = new Porter();
         weightCalculator = new WeightCalculator();
     }
 
+    /**
+     * The main method to start the retrieval process.
+     * @param args the command line arguments
+     */
     public static void main(String[] args) {
         try {
             Retrieval retrieval = new Retrieval();
@@ -33,6 +44,11 @@ public class Retrieval {
         }
     }
 
+    /**
+     * Extract the query and remove stop words and stemming.
+     * @param query the query to be extracted
+     * @return the extracted query represented as a vector of strings
+     */
     private Vector<String> extractQuery(String query) {
         Vector<String> result = new Vector<>();
         String[] keywords = query.split(" ");
@@ -64,6 +80,12 @@ public class Retrieval {
         return result;
     }
 
+    /**
+     * Evaluate the query and return the similarity score of each document.
+     * @param query the query to be evaluated
+     * @return the similarity score of each document
+     * @throws IOException if an I/O error occurs
+     */
     private HashMap<Integer, Double> evaluateQuery(Vector<String> query)
             throws IOException {
         HashMap<Integer, HashMap<Integer, Double>> titleTermWeight =
@@ -77,6 +99,11 @@ public class Retrieval {
 
     }
 
+    /**
+     * Sort the similarity score in descending order and return the top 50 results.
+     * @param similarityScore the similarity score to be sorted
+     * @return the sorted top 50 (or less) results in descending order
+     */
     private HashMap<Integer, Double> sortSimilarityScore(
             HashMap<Integer, Double> similarityScore) {
         List<Map.Entry<Integer, Double>> list = new LinkedList<>(similarityScore.entrySet());

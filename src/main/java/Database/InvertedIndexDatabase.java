@@ -46,12 +46,19 @@ public class InvertedIndexDatabase extends AbstractDatabase {
      * @param pageId The page ID.
      * @throws IOException If an I/O error occurs when adding the entry.
      */
-    public void addEntry(Vector<Integer> wordIds, int pageId) throws IOException {
+    public void addEntry(Vector<Integer> wordIds, int pageId)
+            throws IOException {
         for (int wordId : wordIds) {
             addEntry(wordId, pageId);
         }
     }
 
+    /**
+     * Get an entry from the inverted index database.
+     * @param wordId The word ID.
+     * @return The entry of the word ID, i.e. a map of page ID to word frequency.
+     * @throws IOException If an I/O error occurs when getting the entry.
+     */
     @SuppressWarnings("unchecked")
     public HashMap<Integer, Integer> getEntry(int wordId) throws IOException {
         if (hashtable.get(wordId) == null) {

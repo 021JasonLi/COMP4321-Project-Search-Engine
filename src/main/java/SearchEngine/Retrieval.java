@@ -4,8 +4,7 @@ import Indexer.Porter;
 import Indexer.StopWordRemoval;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Vector;
+import java.util.*;
 
 public class Retrieval {
     private static final int MAX_RESULT = 50;
@@ -26,21 +25,15 @@ public class Retrieval {
             System.out.print("Enter your query: ");
             Vector<String> query = retrieval.extractQuery(System.console().readLine());
             System.out.println("Your query: " + query);
-            HashMap<Integer, HashMap<Integer, Double>> titleTermWeight =
-                    retrieval.weightCalculator.getTermWeight(query, true);
-            HashMap<Integer, HashMap<Integer, Double>> bodyTermWeight =
-                    retrieval.weightCalculator.getTermWeight(query, false);
-//            System.out.println("Title term weight: " + titleTermWeight);
-            System.out.println("Body term weight: " + bodyTermWeight);
-            HashMap<Integer, Integer> queryWeight = retrieval.weightCalculator.getQueryWeight(query);
-            System.out.println("Query weight: " + queryWeight);
+            HashMap<Integer, Double> results = retrieval.evaluateQuery(query);
+            System.out.println("Results: " + results);
             retrieval.weightCalculator.finalizeAllDatabases();
         } catch (IOException e) {
             e.printStackTrace(System.err);
         }
     }
 
-    public Vector<String> extractQuery(String query) {
+    private Vector<String> extractQuery(String query) {
         Vector<String> result = new Vector<>();
         String[] keywords = query.split(" ");
         for (int i = 0; i < keywords.length; i++) {
@@ -70,5 +63,34 @@ public class Retrieval {
         }
         return result;
     }
+
+    private HashMap<Integer, Double> evaluateQuery(Vector<String> query)
+            throws IOException {
+        HashMap<Integer, HashMap<Integer, Double>> titleTermWeight =
+                weightCalculator.getTermWeight(query, true);
+        HashMap<Integer, HashMap<Integer, Double>> bodyTermWeight =
+                weightCalculator.getTermWeight(query, false);
+        HashMap<Integer, Integer> queryWeight = weightCalculator.getQueryWeight(query);
+        HashMap<Integer, Double> similarityScore = SimilarityCalculator.getSimilarityScore(
+                titleTermWeight, bodyTermWeight, queryWeight);
+        return sortSimilarityScore(similarityScore);
+
+    }
+
+    private HashMap<Integer, Double> sortSimilarityScore(
+            HashMap<Integer, Double> similarityScore) {
+        List<Map.Entry<Integer, Double>> list = new LinkedList<>(similarityScore.entrySet());
+        list.sort((o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
+        list.removeIf(entry -> entry.getValue() == 0.0);
+        while (list.size() > MAX_RESULT) {
+            list.remove(list.size() - 1);
+        }
+        HashMap<Integer, Double> results = new LinkedHashMap<>();
+        for (Map.Entry<Integer, Double> entry : list) {
+            results.put(entry.getKey(), entry.getValue());
+        }
+        return results;
+    }
+
 
 }

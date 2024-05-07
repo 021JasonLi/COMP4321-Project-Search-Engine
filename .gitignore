@@ -1,5 +1,8 @@
-target/
-*.class
+WEB-INF/classes/*.class
+WEB-INF/classes/Database/*.class
+WEB-INF/classes/Indexer/*.class
+WEB-INF/classes/SearchEngine/*.class
+WEB-INF/classes/Spider/*.class
 WEB-INF/dbs
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

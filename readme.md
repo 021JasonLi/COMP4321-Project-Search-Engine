@@ -14,22 +14,34 @@ In the root directory of the folder:
 
 * Compile the project 
 ```shell
-javac -cp ./libs/* -d ./target/ "@sources.txt"
+javac -cp ./WEB-INF/lib/* "@sources.txt"
 ```
 
-* Run the project
+* Run the crawler
 ```shell
-java -cp "./libs/*;./target;." Main
+java -cp "./WEB-INF/lib/*;./WEB-INF/classes;." Main
 ```
 
-* Run the tester
+* Run the tester for crawler
 ```shell
-java -cp "./libs/*;./target;." Tester
+java -cp "./WEB-INF/lib/*;./WEB-INF/classes;." Tester
 ```
 
-* Run the search engine
+* Run the search engine (offline)
 ```shell
-java -cp "./libs/*;./target;." SearchEngine.Retrieval
+java -cp "./WEB-INF/lib/*;./WEB-INF/classes;." SearchEngine.Retrieval
+```
+
+* Start up server
+```shell
+%CATALINA_HOME%\bin\startup.bat
+C:\UST\23-24_2_Spring\COMP4321\Project\apache-tomcat-10.1.18\bin\startup.bat
+http://localhost:8080/Search-Engine/index.html
+```
+
+* Shut down server
+```shell
+C:\UST\23-24_2_Spring\COMP4321\Project\apache-tomcat-10.1.18\bin\shutdown.bat
 ```
 
 ## Folders

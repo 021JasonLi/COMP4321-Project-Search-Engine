@@ -10,8 +10,6 @@ import Indexer.StopWordRemoval;
 import java.io.IOException;
 import java.util.*;
 
-import static java.lang.Long.parseLong;
-
 /**
  * The main class to start the retrieval process.
  */
@@ -55,21 +53,15 @@ public class Retrieval {
     }
 
     /**
-     * The main method to start the retrieval process.
-     * @param args the command line arguments
+     * Search the query and display the results.
+     * @param query the query to be searched
+     * @throws IOException if an I/O error occurs
      */
-    public static void main(String[] args) {
-        try {
-            Retrieval retrieval = new Retrieval();
-            System.out.print("Enter your query: ");
-            Vector<String> query = retrieval.extractQuery(System.console().readLine());
-            HashMap<Integer, Double> results = retrieval.evaluateQuery(query);
-            retrieval.displayResults(results);
-            retrieval.weightCalculator.finalizeAllDatabases();
-            retrieval.finalizeAllDatabases();
-        } catch (IOException e) {
-            e.printStackTrace(System.err);
-        }
+    public ArrayList<HashMap<String, String>> search(String query)
+            throws IOException {
+        Vector<String> queryVector = extractQuery(query);
+        HashMap<Integer, Double> results = evaluateQuery(queryVector);
+        return formatResults(results);
     }
 
     /**
@@ -127,6 +119,72 @@ public class Retrieval {
 
     }
 
+    private ArrayList<HashMap<String, String>> formatResults(
+            HashMap<Integer, Double> results) throws IOException {
+        ArrayList<HashMap<String, String>> formattedResults = new ArrayList<>();
+        for (Map.Entry<Integer, Double> entry : results.entrySet()) {
+            HashMap<String, String> formattedResult = new HashMap<>();
+            int pageId = entry.getKey();
+            double score = entry.getValue();
+            // Page Properties
+            formattedResult.put("score", String.format("%.2f", score));
+            formattedResult.put("title", nodePropertyDatabase.getEntry(pageId).get("title"));
+            formattedResult.put("url", nodePropertyDatabase.getEntry(pageId).get("url"));
+            formattedResult.put("lastModified",
+                    nodePropertyDatabase.getEntry(pageId).get("lastModified"));
+            formattedResult.put("size", nodePropertyDatabase.getEntry(pageId).get("size"));
+            // Keywords frequency
+            HashMap<Integer, Integer> keywords = mergeKeywordMap(
+                    titleForwardIndexDatabase.getEntry(pageId),
+                    bodyForwardIndexDatabase.getEntry(pageId));
+            StringBuilder keywordString = new StringBuilder();
+            for (int j = 0; j < MAX_KEYWORD_DISPLAY && j < keywords.size(); j++) {
+                if (j != 0) {
+                    keywordString.append("; ");
+                }
+                int index = (int)keywords.keySet().toArray()[j];
+                String keyword = wordIdDatabase.getWord(index);
+                int frequency = keywords.get(index);
+                keywordString.append(keyword).append(" ").append(frequency);
+            }
+            formattedResult.put("keywords", keywordString.toString());
+            // Parent links
+            StringBuilder parentLinksString = new StringBuilder();
+            HashSet<Integer> parentLinks = childToParentDatabase.getEntry(pageId);
+            if (parentLinks == null || parentLinks.isEmpty()) {
+                parentLinksString.append("No parent links.");
+            }
+            else {
+                for (int j = 0; j < MAX_PARENT_LINK_DISPLAY && j < parentLinks.size(); j++) {
+                    if (j != 0) {
+                        parentLinksString.append(" ");
+                    }
+                    parentLinksString.append(nodePropertyDatabase.getUrl(
+                            (int) parentLinks.toArray()[j]));
+                }
+            }
+            formattedResult.put("parentLinks", parentLinksString.toString());
+            // Child Links
+            StringBuilder childLinksString = new StringBuilder();
+            HashSet<Integer> childLinks = parentToChildDatabase.getEntry(pageId);
+            if (childLinks == null || childLinks.isEmpty()) {
+                childLinksString.append("No child links.");
+            }
+            else {
+                for (int j = 0; j < MAX_CHILD_LINK_DISPLAY && j < childLinks.size(); j++) {
+                    if (j != 0) {
+                        childLinksString.append(" ");
+                    }
+                    childLinksString.append(nodePropertyDatabase.getUrl(
+                            (int) childLinks.toArray()[j]));
+                }
+            }
+            formattedResult.put("childLinks", childLinksString.toString());
+            formattedResults.add(formattedResult);
+        }
+        return formattedResults;
+    }
+
     /**
      * Sort the similarity score in descending order and return the top 50 results.
      * @param similarityScore the similarity score to be sorted
@@ -145,68 +203,6 @@ public class Retrieval {
             results.put(entry.getKey(), entry.getValue());
         }
         return results;
-    }
-
-    private void displayResults(HashMap<Integer, Double> results)
-            throws IOException {
-        if (results.isEmpty()) {
-            System.out.println("No results found.");
-        } else {
-            System.out.println("Results:");
-            for (Map.Entry<Integer, Double> entry : results.entrySet()) {
-                int pageId = entry.getKey();
-                double score = entry.getValue();
-                // Page Properties
-                HashMap<String, String> properties = nodePropertyDatabase.getEntry(pageId);
-                String title = properties.get("title");
-                String url = properties.get("url");
-                String lastModified = properties.get("lastModified");
-                String size = properties.get("size");
-                System.out.printf("%.2f\t%s%n", score*100, title);
-                System.out.printf("\t%s%n", url);
-                System.out.printf("\t%s, %s Bytes%n", new Date(parseLong(lastModified)), size);
-                // Keywords frequency
-                HashMap<Integer, Integer> keywords = mergeKeywordMap(
-                        titleForwardIndexDatabase.getEntry(pageId),
-                        bodyForwardIndexDatabase.getEntry(pageId));
-                for (int j = 0; j < MAX_KEYWORD_DISPLAY && j < keywords.size(); j++) {
-                    if (j == 0) {
-                        System.out.print("\t");
-                    } else {
-                        System.out.print("; ");
-                    }
-                    int index = (int)keywords.keySet().toArray()[j];
-                    String keyword = wordIdDatabase.getWord(index);
-                    int frequency = keywords.get(index);
-                    System.out.print(keyword + " " + frequency);
-                }
-                System.out.println();
-                // Parent links
-                HashSet<Integer> parentLinks = childToParentDatabase.getEntry(pageId);
-                System.out.println("\tParent Links:");
-                if (parentLinks == null || parentLinks.isEmpty()) {
-                    System.out.println("\tNo parent links.");
-                }
-                else {
-                    for (int j = 0; j < MAX_PARENT_LINK_DISPLAY && j < parentLinks.size(); j++) {
-                        System.out.println("\t" + nodePropertyDatabase
-                                .getUrl((int) parentLinks.toArray()[j]));
-                    }
-                }
-                // Child Links
-                HashSet<Integer> childLinks = parentToChildDatabase.getEntry(pageId);
-                System.out.println("\tChild Links:");
-                if (childLinks == null || childLinks.isEmpty()) {
-                    System.out.println("\tNo child links.");
-                }
-                else {
-                    for (int j = 0; j < MAX_CHILD_LINK_DISPLAY && j < childLinks.size(); j++) {
-                        System.out.println("\t" + nodePropertyDatabase
-                                .getUrl((int) childLinks.toArray()[j]));
-                    }
-                }
-            }
-        }
     }
 
     private void finalizeAllDatabases() {
@@ -230,6 +226,5 @@ public class Retrieval {
         }
         return result;
     }
-
 
 }

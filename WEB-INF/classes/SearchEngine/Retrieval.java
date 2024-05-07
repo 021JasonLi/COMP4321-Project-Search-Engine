@@ -53,6 +53,24 @@ public class Retrieval {
     }
 
     /**
+     * The main method to start the retrieval process.
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        try {
+            Retrieval retrieval = new Retrieval();
+            System.out.print("Enter your query: ");
+            String query = System.console().readLine();
+            ArrayList<HashMap<String, String>> results = retrieval.search(query);
+            retrieval.displayResults(results);
+            retrieval.weightCalculator.finalizeAllDatabases();
+            retrieval.finalizeAllDatabases();
+        } catch (IOException e) {
+            e.printStackTrace(System.err);
+        }
+    }
+
+    /**
      * Search the query and display the results.
      * @param query the query to be searched
      * @throws IOException if an I/O error occurs
@@ -130,8 +148,9 @@ public class Retrieval {
             formattedResult.put("score", String.format("%.2f", score));
             formattedResult.put("title", nodePropertyDatabase.getEntry(pageId).get("title"));
             formattedResult.put("url", nodePropertyDatabase.getEntry(pageId).get("url"));
-            formattedResult.put("lastModified",
-                    nodePropertyDatabase.getEntry(pageId).get("lastModified"));
+            Date lastModified = new Date(Long.parseLong(
+                    nodePropertyDatabase.getEntry(pageId).get("lastModified")));
+            formattedResult.put("lastModified", lastModified.toString());
             formattedResult.put("size", nodePropertyDatabase.getEntry(pageId).get("size"));
             // Keywords frequency
             HashMap<Integer, Integer> keywords = mergeKeywordMap(
@@ -152,7 +171,7 @@ public class Retrieval {
             StringBuilder parentLinksString = new StringBuilder();
             HashSet<Integer> parentLinks = childToParentDatabase.getEntry(pageId);
             if (parentLinks == null || parentLinks.isEmpty()) {
-                parentLinksString.append("No parent links.");
+                parentLinksString.append("");
             }
             else {
                 for (int j = 0; j < MAX_PARENT_LINK_DISPLAY && j < parentLinks.size(); j++) {
@@ -168,7 +187,7 @@ public class Retrieval {
             StringBuilder childLinksString = new StringBuilder();
             HashSet<Integer> childLinks = parentToChildDatabase.getEntry(pageId);
             if (childLinks == null || childLinks.isEmpty()) {
-                childLinksString.append("No child links.");
+                childLinksString.append("");
             }
             else {
                 for (int j = 0; j < MAX_CHILD_LINK_DISPLAY && j < childLinks.size(); j++) {
@@ -205,13 +224,38 @@ public class Retrieval {
         return results;
     }
 
-    private void finalizeAllDatabases() {
-        nodePropertyDatabase.finish();
-        parentToChildDatabase.finish();
-        childToParentDatabase.finish();
-        titleForwardIndexDatabase.finish();
-        bodyForwardIndexDatabase.finish();
-        wordIdDatabase.finish();
+    private void displayResults(ArrayList<HashMap<String, String>> results)
+            throws IOException {
+        for (int i = 0; i < results.size(); i++) {
+            System.out.println("Result " + (i + 1));
+            System.out.println("Score: " + results.get(i).get("score"));
+            System.out.println("Title: " + results.get(i).get("title"));
+            System.out.println("URL: " + results.get(i).get("url"));
+            System.out.println("Last Modified: " + results.get(i).get("lastModified"));
+            System.out.println("Size: " + results.get(i).get("size"));
+            System.out.println("Keywords: " + results.get(i).get("keywords"));
+            String[] parentLinks = results.get(i).get("parentLinks").split(" ");
+            if (parentLinks[0] == "") {
+                System.out.println("Parent Links: None");
+            }
+            else {
+                System.out.println("Parent Links: ");
+                for (String parentLink : parentLinks) {
+                    System.out.println(parentLink);
+                }
+            }
+            String[] childLinks = results.get(i).get("childLinks").split(" ");
+            if (childLinks[0] == "") {
+                System.out.println("Child Links: None");
+            }
+            else {
+                System.out.println("Child Links: ");
+                for (String childLink : childLinks) {
+                    System.out.println(childLink);
+                }
+            }
+            System.out.println();
+        }
     }
 
     private static HashMap<Integer, Integer> mergeKeywordMap(
@@ -225,6 +269,15 @@ public class Retrieval {
             result.merge(key, map2.get(key), Integer::sum);
         }
         return result;
+    }
+
+    public void finalizeAllDatabases() {
+        nodePropertyDatabase.finish();
+        parentToChildDatabase.finish();
+        childToParentDatabase.finish();
+        titleForwardIndexDatabase.finish();
+        bodyForwardIndexDatabase.finish();
+        wordIdDatabase.finish();
     }
 
 }

@@ -11,7 +11,7 @@ import java.util.Vector;
  */
 public class StopWordRemoval {
     private final static String STOP_WORD_LIST_DIRECTORY =
-            "./src/main/resources/stopwords.txt";
+            "./WEB-INF/lib/stopwords.txt";
     private final HashSet<String> stopWords;
 
     /**

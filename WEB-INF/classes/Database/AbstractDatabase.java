@@ -21,7 +21,7 @@ public abstract class AbstractDatabase {
      */
     protected AbstractDatabase(String managerName, String objectName) {
         try {
-            manager = RecordManagerFactory.createRecordManager("./db/" + managerName);
+            manager = RecordManagerFactory.createRecordManager("./WEB-INF/dbs/" + managerName);
             long recId = manager.getNamedObject(objectName);
             if (recId != 0) {
                 hashtable = HTree.load(manager, recId);

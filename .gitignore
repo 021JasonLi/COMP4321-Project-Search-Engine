@@ -1,5 +1,6 @@
 target/
-db/*
+*.class
+WEB-INF/dbs
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

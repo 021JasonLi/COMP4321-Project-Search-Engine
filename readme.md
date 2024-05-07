@@ -31,17 +31,18 @@ java -cp "./WEB-INF/lib/*;./WEB-INF/classes;." Tester
 
 ## Running the Search Engine
 
-Copy the folder to the webapps folder of Tomcat.
+Copy the folder to the webapps folder of Tomcat. 
+And set the environment variable `CATALINA_HOME` to the path of the Tomcat folder.
 
 * Start up server
 ```shell
 %CATALINA_HOME%\bin\startup.bat
 C:\UST\23-24_2_Spring\COMP4321\Project\apache-tomcat-10.1.18\bin\startup.bat
-http://localhost:8080/Search-Engine/index.html
 ```
 Access the search engine in localhost: `http://localhost:8080/Search-Engine/index.html`
 
 * Shut down server
 ```shell
+%CATALINA_HOME%\bin\shutdown.bat
 C:\UST\23-24_2_Spring\COMP4321\Project\apache-tomcat-10.1.18\bin\shutdown.bat
 ```

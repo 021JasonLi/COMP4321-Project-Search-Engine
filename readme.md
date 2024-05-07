@@ -27,11 +27,6 @@ java -cp "./WEB-INF/lib/*;./WEB-INF/classes;." Main
 java -cp "./WEB-INF/lib/*;./WEB-INF/classes;." Tester
 ```
 
-* Run the search engine (offline)
-```shell
-java -cp "./WEB-INF/lib/*;./WEB-INF/classes;." SearchEngine.Retrieval
-```
-
 * Start up server
 ```shell
 %CATALINA_HOME%\bin\startup.bat
